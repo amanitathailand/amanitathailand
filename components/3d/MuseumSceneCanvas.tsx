@@ -78,8 +78,8 @@ export function MuseumSceneCanvas({ modelUrl = '/models/amanita.glb' }: { modelU
     try {
       // --- Scene Setup ---
       const scene = new THREE.Scene();
-      scene.background = new THREE.Color('#070b08');
-      scene.fog = new THREE.FogExp2('#070b08', 0.075);
+      scene.background = new THREE.Color('#ffe0e5');
+      scene.fog = new THREE.FogExp2('#ffd0d8', 0.045);
 
       // --- Camera Setup with Mobile Awareness ---
       const width = container.clientWidth || window.innerWidth;
@@ -133,12 +133,12 @@ export function MuseumSceneCanvas({ modelUrl = '/models/amanita.glb' }: { modelU
       scene.add(keyLight);
 
       // Rim light: Vibrant crimson back-glow (translucency simulation)
-      const rimLight = new THREE.PointLight(0xe11d48, 1.2, 8.5);
+      const rimLight = new THREE.PointLight(0xdf7182, 1.35, 8.5);
       rimLight.position.set(-3.5, 2.5, -2.5);
       scene.add(rimLight);
 
       // Fill light: Gentle forest moss green tone
-      const fillLight = new THREE.DirectionalLight(0x22543d, 0.4);
+      const fillLight = new THREE.DirectionalLight(0xffd9df, 0.65);
       fillLight.position.set(0, -3, 3);
       scene.add(fillLight);
 
@@ -325,14 +325,14 @@ export function MuseumSceneCanvas({ modelUrl = '/models/amanita.glb' }: { modelU
       mushroomGroup.add(volvaMesh);
 
       // Inner Amber Mystical Core Light
-      const coreLight = new THREE.PointLight(0xf59e0b, 2.5, 5.5);
+      const coreLight = new THREE.PointLight(0xffc4cf, 2.2, 5.5);
       coreLight.position.set(0, 0.95, 0);
       mushroomGroup.add(coreLight);
 
-      // --- Floating Golden Spores Particles (GPU Instanced) ---
+      // --- Floating White Spores Particles (GPU Instanced) ---
       const sporeCount = isMobile ? 240 : 420;
       const sporeGeo = new THREE.SphereGeometry(0.024, 6, 6);
-      const sporeMat = new THREE.MeshBasicMaterial({ color: 0xfcd34d, transparent: true, opacity: 0.75 });
+      const sporeMat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.88 });
       const sporeInstanced = new THREE.InstancedMesh(sporeGeo, sporeMat, sporeCount);
 
       const sporeData = Array.from({ length: sporeCount }, () => ({

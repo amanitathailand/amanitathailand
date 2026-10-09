@@ -3,12 +3,17 @@
 @tailwind utilities;
 
 :root {
-  --background: #070b08;
-  --foreground: #f5f3eb;
+  --background: #ffe9ed;
+  --foreground: #4a202b;
 }
 
 body {
   background-color: var(--background);
+  background-image:
+    radial-gradient(circle at 10% 5%, rgba(207, 83, 104, 0.30), transparent 30%),
+    radial-gradient(circle at 90% 15%, rgba(255, 255, 255, 0.94), transparent 34%),
+    linear-gradient(135deg, #fff2f4 0%, #ffdfe5 48%, #fff7f8 100%);
+  background-attachment: fixed;
   color: var(--foreground);
   overflow-x: hidden;
 }
@@ -17,12 +22,21 @@ body {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #030504;
+  background: #ffdbe2;
 }
 ::-webkit-scrollbar-thumb {
-  background: #3a080d;
+  background: #d7657b;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #83101c;
+  background: #b53b52;
+}
+
+@layer utilities {
+  .text-neutral-300 { color: #5f2c3a !important; }
+  .text-neutral-400 { color: #754455 !important; }
+  .text-neutral-500 { color: #845466 !important; }
+  .text-neutral-700 { color: #9a6474 !important; }
+  .text-neutral-800 { color: #b77887 !important; }
+  .text-neutral-900 { color: #4a202b !important; }
 }

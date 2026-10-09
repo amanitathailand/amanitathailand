@@ -107,15 +107,15 @@ export default function HomePage() {
           className="absolute inset-0 flex items-center justify-center cursor-pointer overflow-hidden bg-obsidian-950"
         >
           {/* Deep Forest Atmospheric Backdrop with Ambient Mist */}
-          <div className="absolute inset-0 bg-gradient-to-t from-obsidian-950 via-obsidian-900/60 to-transparent z-10 pointer-events-none" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(185,28,28,0.18)_0%,transparent_70%)] pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-t from-crimson-950 via-white/20 to-transparent z-10 pointer-events-none" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(239,158,171,0.30)_0%,transparent_70%)] pointer-events-none" />
 
           {/* Floating Spore Particles (CSS Animation) */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none z-10">
             {Array.from({ length: 35 }).map((_, i) => (
               <div
                 key={i}
-                className="absolute w-1.5 h-1.5 rounded-full bg-amberGold-400/70 blur-[0.5px] animate-pulse"
+                className="absolute w-1.5 h-1.5 rounded-full bg-white/90 shadow-[0_0_10px_rgba(255,255,255,0.95)] blur-[0.5px] animate-pulse"
                 style={{
                   top: `${(i * 17) % 95}%`,
                   left: `${(i * 29) % 95}%`,
@@ -134,10 +134,10 @@ export default function HomePage() {
             }}
           >
             {/* Glowing Backlight Halo */}
-            <div className="absolute w-80 h-80 sm:w-[420px] sm:h-[420px] rounded-full bg-gradient-to-tr from-crimson-600/30 via-amberGold-500/20 to-transparent blur-3xl -z-10 animate-pulse" />
+            <div className="absolute w-80 h-80 sm:w-[420px] sm:h-[420px] rounded-full bg-gradient-to-tr from-crimson-600/35 via-white/45 to-transparent blur-3xl -z-10 animate-pulse" />
 
             {/* Real Specimen Photo */}
-            <div className="relative group w-72 sm:w-96 rounded-3xl p-3 bg-gradient-to-b from-amberGold-500/30 via-crimson-900/40 to-obsidian-900/90 border border-amberGold-500/40 shadow-[0_20px_60px_rgba(0,0,0,0.9)] backdrop-blur-xl">
+            <div className="relative group w-72 sm:w-96 rounded-3xl p-3 bg-gradient-to-b from-white/90 via-crimson-950/75 to-crimson-900/80 border border-white/80 shadow-[0_20px_60px_rgba(156,61,82,0.24)] backdrop-blur-xl">
               <div className="relative w-full h-80 sm:h-96 rounded-2xl overflow-hidden shadow-2xl">
                 <img
                   src={siteContent.home_photo_image_url || INITIAL_SITE_CONTENT.home_photo_image_url}
@@ -146,16 +146,16 @@ export default function HomePage() {
                 />
                 
                 {/* Botanical Badge */}
-                <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-obsidian-950/80 border border-amberGold-400/50 backdrop-blur-md flex items-center gap-1.5">
+                <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-white/85 border border-white/80 backdrop-blur-md flex items-center gap-1.5">
                   <Sparkles className="w-3 h-3 text-amberGold-400" />
-                  <span className="text-[10px] font-mono text-amberGold-300 font-bold uppercase tracking-wider">
+                  <span className="text-[10px] font-mono text-amberGold-600 font-bold uppercase tracking-wider">
                     ภาพถ่ายตัวอย่าง
                   </span>
                 </div>
 
                 {/* Subtitle Overlay */}
-                <div className="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-obsidian-950 via-obsidian-950/70 to-transparent">
-                  <span className="text-xs font-serif font-bold text-amberGold-200 block">
+                <div className="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-crimson-950 via-crimson-950/75 to-transparent">
+                  <span className="text-xs font-serif font-bold text-white block">
                     {siteContent.home_photo_caption || 'Amanita Muscaria (L.) Lam.'}
                   </span>
                   <span className="text-[10px] text-neutral-300 font-mono">
@@ -178,7 +178,7 @@ export default function HomePage() {
             setDisplayMode(next);
             trackEvent('museum_entry', `mode_switch_${next}`);
           }}
-          className="pointer-events-auto flex items-center gap-2 px-4 py-2 rounded-full border border-amberGold-500/50 bg-obsidian-900/90 hover:bg-crimson-950 hover:border-amberGold-400 text-xs font-serif text-amberGold-300 shadow-xl backdrop-blur-md transition-all hover:scale-105"
+          className="pointer-events-auto flex items-center gap-2 px-4 py-2 rounded-full border border-crimson-600/60 bg-white/90 hover:bg-crimson-900 hover:border-crimson-500 text-xs font-serif text-amberGold-600 hover:text-white shadow-xl shadow-crimson-900/15 backdrop-blur-md transition-all hover:scale-105"
         >
           {displayMode === '3d' ? (
             <>
@@ -201,7 +201,7 @@ export default function HomePage() {
         <div className="absolute bottom-20 sm:bottom-24 inset-x-0 z-20 flex flex-col items-center pointer-events-none text-center px-4 animate-pulse">
           <button
             onClick={openPortal}
-            className="pointer-events-auto flex items-center gap-2.5 px-6 py-3 rounded-full border border-amberGold-500/60 bg-crimson-950/85 text-amberGold-200 hover:bg-crimson-900 hover:border-amberGold-400 text-xs sm:text-sm font-serif tracking-widest uppercase transition-all shadow-2xl backdrop-blur-md hover:scale-105"
+            className="pointer-events-auto flex items-center gap-2.5 px-6 py-3 rounded-full border border-crimson-500/80 bg-crimson-600 text-white hover:bg-crimson-500 hover:border-crimson-500 text-xs sm:text-sm font-serif tracking-widest uppercase transition-all shadow-2xl shadow-crimson-900/25 backdrop-blur-md hover:scale-105"
           >
             <Sparkles className="w-4 h-4 text-amberGold-400" />
             <span>{siteContent.portal_button_text}</span>
@@ -216,10 +216,10 @@ export default function HomePage() {
           Bottom Quick-Access Floating Dock
           ====================================================================== */}
       <div className="absolute bottom-4 inset-x-0 z-20 flex justify-center px-4 pointer-events-none">
-        <div className="pointer-events-auto flex items-center gap-1 sm:gap-2.5 p-1.5 sm:p-2 rounded-2xl border border-neutral-800 bg-obsidian-950/90 backdrop-blur-lg shadow-2xl text-[11px] sm:text-xs font-serif overflow-x-auto max-w-full">
+        <div className="pointer-events-auto flex items-center gap-1 sm:gap-2.5 p-1.5 sm:p-2 rounded-2xl border border-crimson-700/30 bg-white/90 backdrop-blur-lg shadow-2xl shadow-crimson-900/15 text-[11px] sm:text-xs font-serif overflow-x-auto max-w-full">
           <Link
             href="/museum"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-transparent hover:border-crimson-700 hover:bg-crimson-950/60 text-neutral-300 hover:text-amberGold-300 transition whitespace-nowrap"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-transparent hover:border-crimson-600 hover:bg-crimson-950 text-neutral-300 hover:text-amberGold-600 transition whitespace-nowrap"
           >
             <Layers className="w-3.5 h-3.5 text-amberGold-400" />
             <span>ห้องนิทรรศการ</span>
@@ -229,7 +229,7 @@ export default function HomePage() {
 
           <Link
             href="/products"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-transparent hover:border-emerald-800 hover:bg-emerald-950/40 text-neutral-300 hover:text-emerald-300 transition whitespace-nowrap"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-transparent hover:border-crimson-600 hover:bg-crimson-950 text-neutral-300 hover:text-emerald-600 transition whitespace-nowrap"
           >
             <Package className="w-3.5 h-3.5 text-emerald-400" />
             <span>ตัวอย่างพฤกษศาสตร์</span>
@@ -239,7 +239,7 @@ export default function HomePage() {
 
           <Link
             href="/articles"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-transparent hover:border-blue-800 hover:bg-blue-950/40 text-neutral-300 hover:text-blue-300 transition whitespace-nowrap"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-transparent hover:border-crimson-600 hover:bg-crimson-950 text-neutral-300 hover:text-blue-700 transition whitespace-nowrap"
           >
             <BookOpen className="w-3.5 h-3.5 text-blue-400" />
             <span>คลังบทความ</span>

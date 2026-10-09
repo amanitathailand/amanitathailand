@@ -64,14 +64,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   return (
     <div className="min-h-screen bg-obsidian-950 text-mushroomWhite flex flex-col md:flex-row">
       {/* Mobile Header Bar */}
-      <div className="md:hidden flex items-center justify-between p-4 border-b border-neutral-800 bg-obsidian-900 sticky top-0 z-30">
+      <div className="md:hidden flex items-center justify-between p-4 border-b border-crimson-700/30 bg-white/80 sticky top-0 z-30 shadow-sm">
         <div>
           <span className="text-xs font-mono uppercase text-amberGold-400 font-bold block">Amanita Thailand</span>
           <span className="text-sm font-serif font-bold text-mushroomWhite">CMS Admin</span>
         </div>
         <button
           onClick={() => setMobileNavOpen(!mobileNavOpen)}
-          className="p-2 rounded-lg border border-neutral-800 text-neutral-300"
+          className="p-2 rounded-lg border border-crimson-700/30 text-neutral-300 bg-white/80"
         >
           {mobileNavOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
@@ -79,7 +79,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
       {/* Sidebar for Desktop & Mobile Sheet */}
       <aside className={`
-        fixed inset-y-0 left-0 z-40 w-64 border-r border-neutral-800 bg-obsidian-900/95 p-6 flex flex-col justify-between shrink-0 transition-transform duration-300 md:static md:translate-x-0
+        fixed inset-y-0 left-0 z-40 w-64 border-r border-crimson-700/30 bg-white/90 p-6 flex flex-col justify-between shrink-0 transition-transform duration-300 md:static md:translate-x-0 shadow-xl shadow-crimson-900/10
         ${mobileNavOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
       `}>
         <div>
@@ -104,8 +104,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                   onClick={() => setMobileNavOpen(false)}
                   className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition ${
                     isActive 
-                      ? 'bg-crimson-900/80 text-amberGold-200 border border-amberGold-500/40 shadow-md font-semibold' 
-                      : 'hover:bg-crimson-950/40 text-neutral-300 hover:text-amberGold-300'
+                    ? 'bg-crimson-700 text-white border border-crimson-600 shadow-md shadow-crimson-900/20 font-semibold'
+                    : 'hover:bg-crimson-950 text-neutral-300 hover:text-amberGold-600'
                   }`}
                 >
                   <Icon className={`w-4 h-4 ${isActive ? 'text-amberGold-400' : 'text-neutral-400'}`} />
@@ -126,7 +126,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </Link>
           <button
             onClick={handleLogout}
-            className="w-full flex items-center gap-2 px-3 py-2 rounded-lg bg-neutral-900 hover:bg-crimson-950 text-neutral-400 hover:text-crimson-300 text-xs transition border border-neutral-800"
+            className="w-full flex items-center gap-2 px-3 py-2 rounded-lg bg-crimson-950 hover:bg-crimson-900 text-neutral-400 hover:text-amberGold-600 text-xs transition border border-crimson-700/30"
           >
             <LogOut className="w-3.5 h-3.5" />
             ออกจากระบบ (Sign Out)
