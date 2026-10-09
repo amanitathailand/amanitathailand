@@ -171,14 +171,14 @@ export default function HomePage() {
       {/* ======================================================================
           Switch Display Mode Button (Top Right Floating Badge)
           ====================================================================== */}
-      <div className="absolute top-16 sm:top-20 inset-x-0 z-30 flex justify-center pointer-events-none px-4">
+      <div className="absolute top-28 sm:top-20 inset-x-0 z-30 flex justify-center pointer-events-none px-4">
         <button
           onClick={() => {
             const next = displayMode === '3d' ? 'real_photo' : '3d';
             setDisplayMode(next);
             trackEvent('museum_entry', `mode_switch_${next}`);
           }}
-          className="pointer-events-auto flex items-center gap-2 px-4 py-2 rounded-full border border-crimson-600/70 bg-white/95 hover:bg-crimson-600 hover:border-crimson-600 text-xs font-serif text-[#2b2d42] hover:text-white shadow-xl shadow-[#2b2d42]/15 backdrop-blur-md transition-all hover:scale-105"
+          className="pointer-events-auto flex max-w-full items-center gap-2 rounded-full border border-crimson-600/70 bg-white/95 px-3 py-2 text-[10px] font-serif text-[#2b2d42] shadow-xl shadow-[#2b2d42]/15 backdrop-blur-md transition-all hover:bg-crimson-600 hover:border-crimson-600 hover:text-white hover:scale-105 sm:px-4 sm:text-xs"
         >
           {displayMode === '3d' ? (
             <>
@@ -215,7 +215,7 @@ export default function HomePage() {
       {/* ======================================================================
           Bottom Quick-Access Floating Dock
           ====================================================================== */}
-      <div className="absolute bottom-4 inset-x-0 z-20 flex justify-center px-4 pointer-events-none">
+      <div className="absolute bottom-4 inset-x-0 z-20 hidden justify-center px-4 pointer-events-none md:flex">
         <div className="pointer-events-auto flex items-center gap-1 sm:gap-2.5 p-1.5 sm:p-2 rounded-2xl border border-crimson-700/30 bg-white/90 backdrop-blur-lg shadow-2xl shadow-crimson-900/15 text-[11px] sm:text-xs font-serif overflow-x-auto max-w-full">
           <Link
             href="/museum"
