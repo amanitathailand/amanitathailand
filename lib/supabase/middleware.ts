@@ -7,7 +7,18 @@ export async function updateSession(request: NextRequest) {
   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
   if (!supabaseUrl || !supabaseKey) {
-    throw new Error('Missing Supabase environment variables');
+    // Without Supabase configured we can't verify sessions, so let public pages render
+    // and send admin routes to the login page instead of crashing every request.
+    const isAdminRoute =
+      request.nextUrl.pathname.startsWith('/admin') &&
+      request.nextUrl.pathname !== '/admin/login';
+    if (isAdminRoute) {
+      const loginUrl = request.nextUrl.clone();
+      loginUrl.pathname = '/admin/login';
+      loginUrl.search = '';
+      return NextResponse.redirect(loginUrl);
+    }
+    return supabaseResponse;
   }
 
   const supabase = createServerClient(
