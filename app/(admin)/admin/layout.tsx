@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
@@ -49,16 +49,16 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   }
 
   const navLinks = [
-    { label: 'เนเธ”เธเธเธญเธฃเนเธ”เธชเธ–เธดเธ•เธด', href: '/admin/dashboard', icon: LayoutDashboard },
-    { label: 'เธเธณเธชเธฑเนเธเธเธทเนเธญ & เธชเธฅเธดเธ', href: '/admin/orders', icon: ShoppingBag },
-    { label: 'เธเนเธญเธเธ—เธฒเธเธ•เธดเธ”เธ•เนเธญ & เธเธฃเนเธญเธกเน€เธเธขเน', href: '/admin/contact', icon: PhoneCall },
-    { label: 'เนเธเนเนเธเธซเธฑเธงเธเนเธญเธซเธฅเธฑเธเน€เธงเนเธ', href: '/admin/site-content', icon: Type },
-    { label: 'เธเธฑเธ”เธเธฒเธฃเธซเนเธญเธเธเธฑเธ”เนเธชเธ”เธ', href: '/admin/museum', icon: Layers },
-    { label: 'เธเธฑเธ”เธเธฒเธฃเธเธ—เธเธงเธฒเธก', href: '/admin/articles', icon: BookOpen },
-    { label: 'เธ•เธฑเธงเธญเธขเนเธฒเธเธเธคเธเธฉเธจเธฒเธชเธ•เธฃเน', href: '/admin/products', icon: Package },
+    { label: 'แดชบอร์ดสถิติ', href: '/admin/dashboard', icon: LayoutDashboard },
+    { label: 'คำสั่งซื้อ & สลิป', href: '/admin/orders', icon: ShoppingBag },
+    { label: 'ช่องทางติดต่อ & พร้อมเพย์', href: '/admin/contact', icon: PhoneCall },
+    { label: 'แก้ไขหัวข้อหลักเว็บ', href: '/admin/site-content', icon: Type },
+    { label: 'จัดการห้องจัดแสดง', href: '/admin/museum', icon: Layers },
+    { label: 'จัดการบทความ', href: '/admin/articles', icon: BookOpen },
+    { label: 'ตัวอย่างพฤกษศาสตร์', href: '/admin/products', icon: Package },
     { label: 'Tracking Pixels', href: '/admin/pixels', icon: Sliders },
-    { label: 'เนเธเนเธเน€เธ•เธทเธญเธเธเนเธฒเธ LINE', href: '/admin/line-notify', icon: BellRing },
-    { label: 'เธเธฅเธฑเธเธชเธทเนเธญ (Media)', href: '/admin/media', icon: ImageIcon },
+    { label: 'แจ้งเตือนผ่าน LINE', href: '/admin/line-notify', icon: BellRing },
+    { label: 'คลังสื่อ (Media)', href: '/admin/media', icon: ImageIcon },
   ];
 
   return (
@@ -84,12 +84,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       `}>
         <div>
           <div className="mb-8 hidden md:block">
-            <span className="text-xs font-mono uppercase tracking-widest text-amberGold-400 block font-bold">
+            <span className="text-xs font-mono uppercase tracking-widest text-crimson-600 block font-bold">
               Amanita Thailand
             </span>
             <span className="text-base font-serif font-bold text-mushroomWhite block">CMS & Analytics Portal</span>
             {userEmail && (
-              <span className="text-[11px] text-emerald-400 font-mono block mt-1">โ— {userEmail}</span>
+              <span className="text-[11px] text-emerald-400 font-mono block mt-1">● {userEmail}</span>
             )}
           </div>
 
@@ -122,14 +122,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             className="flex items-center gap-2 text-xs text-[#596078] hover:text-crimson-600 transition"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
-            เธเธฅเธฑเธเนเธเธซเธเนเธฒเธเธดเธเธดเธเธ เธฑเธ“เธ‘เน 3D
+            กลับไปหน้าพิพิธภัณฑ์ 3D
           </Link>
           <button
             onClick={handleLogout}
             className="w-full flex items-center gap-2 px-3 py-2 rounded-lg bg-crimson-950 hover:bg-crimson-900 text-[#596078] hover:text-white text-xs transition border border-crimson-700/30"
           >
             <LogOut className="w-3.5 h-3.5" />
-            เธญเธญเธเธเธฒเธเธฃเธฐเธเธ (Sign Out)
+            ออกจากระบบ (Sign Out)
           </button>
         </div>
       </aside>
@@ -141,4 +141,3 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     </div>
   );
 }
-

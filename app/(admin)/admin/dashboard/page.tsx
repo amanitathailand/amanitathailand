@@ -60,7 +60,7 @@ export default async function AdminDashboardPage() {
     <div className="space-y-8">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-serif font-bold text-amberGold-200">แดชบอร์ดผู้ดูแลระบบ</h1>
+          <h1 className="text-3xl font-serif font-bold text-[#2b2d42]">แดชบอร์ดผู้ดูแลระบบ</h1>
           <p className="text-xs text-neutral-400 font-mono mt-1">ภาพรวม Analytics ที่บันทึกไว้ใน Supabase</p>
         </div>
         <div className="flex items-center gap-2">
@@ -115,7 +115,7 @@ export default async function AdminDashboardPage() {
       </div>
 
       <div className="p-6 rounded-2xl border border-neutral-800 bg-obsidian-900/60 shadow-xl">
-        <h2 className="text-lg font-serif font-bold text-amberGold-300 mb-4">ประวัติกิจกรรมล่าสุด (Recent Activity)</h2>
+        <h2 className="text-lg font-serif font-bold text-[#2b2d42] mb-4">ประวัติกิจกรรมล่าสุด (Recent Activity)</h2>
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs font-sans">
             <thead>

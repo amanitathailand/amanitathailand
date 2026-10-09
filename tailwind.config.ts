@@ -11,6 +11,9 @@ export default {
     extend: {
       colors: {
         crimson: {
+          200: '#8f172d',
+          300: '#d90429',
+          400: '#ef233c',
           950: '#edf2f4',
           900: '#dfe5e9',
           800: '#f7a1ab',
@@ -25,6 +28,8 @@ export default {
           800: '#dfe5e9'
         },
         amberGold: {
+          200: '#2b2d42',
+          300: '#596078',
           400: '#ef233c',
           500: '#d90429',
           600: '#b80324'

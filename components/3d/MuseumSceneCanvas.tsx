@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
@@ -588,4 +588,3 @@ export function MuseumSceneCanvas({ modelUrl = '/models/amanita.glb' }: { modelU
 }
 
 export default MuseumSceneCanvas;
-
