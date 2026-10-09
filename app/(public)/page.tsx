@@ -115,7 +115,7 @@ export default function HomePage() {
             {Array.from({ length: 35 }).map((_, i) => (
               <div
                 key={i}
-                className="absolute w-1.5 h-1.5 rounded-full bg-white/90 shadow-[0_0_10px_rgba(255,255,255,0.95)] blur-[0.5px] animate-pulse"
+                className="absolute w-1.5 h-1.5 rounded-full bg-[#fff1a8]/90 shadow-[0_0_10px_rgba(255,241,168,0.88)] blur-[0.5px] animate-pulse"
                 style={{
                   top: `${(i * 17) % 95}%`,
                   left: `${(i * 29) % 95}%`,

@@ -329,10 +329,10 @@ export function MuseumSceneCanvas({ modelUrl = '/models/amanita.glb' }: { modelU
       coreLight.position.set(0, 0.95, 0);
       mushroomGroup.add(coreLight);
 
-      // --- Floating White Spores Particles (GPU Instanced) ---
+      // --- Floating Soft-Gold Spores Particles (GPU Instanced) ---
       const sporeCount = isMobile ? 240 : 420;
       const sporeGeo = new THREE.SphereGeometry(0.024, 6, 6);
-      const sporeMat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.88 });
+      const sporeMat = new THREE.MeshBasicMaterial({ color: 0xfff1a8, transparent: true, opacity: 0.72 });
       const sporeInstanced = new THREE.InstancedMesh(sporeGeo, sporeMat, sporeCount);
 
       const sporeData = Array.from({ length: sporeCount }, () => ({

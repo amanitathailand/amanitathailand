@@ -3,9 +3,39 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useMuseumStore } from '@/store/useMuseumStore';
-import { Volume2, VolumeX, Sparkles, User, Layers, BookOpen, Package, PhoneCall } from 'lucide-react';
+import { Volume2, VolumeX, Sparkles, User, Layers, BookOpen, Package, PhoneCall, Home } from 'lucide-react';
 import { INITIAL_SITE_CONTENT } from '@/lib/data/initialData';
 import type { SiteContentSettings } from '@/types';
+
+const navItems = [
+  { href: '/', label: 'หน้าแรก', icon: Home },
+  { href: '/museum', label: 'ห้องนิทรรศการ', icon: Layers },
+  { href: '/products', label: 'ตัวอย่างพฤกษศาสตร์', icon: Package },
+  { href: '/articles', label: 'คลังบทความ', icon: BookOpen },
+  { href: '/contact', label: 'ติดต่อ', icon: PhoneCall },
+];
+
+function NavigationLinks({ mobile = false }: { mobile?: boolean }) {
+  return (
+    <nav
+      aria-label="เมนูหลัก"
+      className={mobile
+        ? 'flex md:hidden w-full items-center gap-1 overflow-x-auto px-1 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden'
+        : 'hidden md:flex items-center gap-1 rounded-full border border-[#8d99ae]/45 bg-white/95 px-2 py-1.5 shadow-lg shadow-[#2b2d42]/10 backdrop-blur-md'}
+    >
+      {navItems.map(({ href, label, icon: Icon }) => (
+        <Link
+          key={href}
+          href={href}
+          className="flex shrink-0 items-center justify-center gap-1.5 rounded-full px-3 py-2 text-[11px] font-medium text-[#2b2d42] transition hover:bg-[#d90429] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ef233c]"
+        >
+          <Icon className="h-3.5 w-3.5 text-[#d90429]" aria-hidden="true" />
+          <span>{label}</span>
+        </Link>
+      ))}
+    </nav>
+  );
+}
 
 export function PublicHeader() {
   const { isPortalOpen, openPortal, isAudioMuted, toggleAudio } = useMuseumStore();
@@ -24,81 +54,54 @@ export function PublicHeader() {
   }, []);
 
   return (
-    <header className="fixed top-0 inset-x-0 z-40 flex items-center justify-between px-4 py-3 sm:px-6 sm:py-4 pointer-events-none">
-      <Link href="/" className="pointer-events-auto flex items-center gap-2.5 group">
-        <div className="w-8 h-8 rounded-full border border-crimson-700/60 bg-white/80 flex items-center justify-center shadow-lg shadow-crimson-700/10 group-hover:border-amberGold-400 transition shrink-0">
-          <Sparkles className="w-4 h-4 text-amberGold-400" />
-        </div>
-        <div>
-          <span className="text-base sm:text-lg font-serif tracking-widest text-amberGold-600 uppercase block font-bold leading-none">
-            {siteContent.site_title}
-          </span>
-          <span className="text-[10px] sm:text-[11px] text-neutral-400 tracking-widest hidden sm:block font-sans">
-            {siteContent.site_subtitle}
-          </span>
-        </div>
-      </Link>
+    <header className="fixed inset-x-0 top-0 z-40 border-b border-[#8d99ae]/35 bg-white/95 px-3 py-2 shadow-sm backdrop-blur-xl sm:px-5 sm:py-3">
+      <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-2">
+        <Link href="/" className="flex min-w-0 max-w-[48vw] items-center gap-2.5 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ef233c] md:max-w-[25vw]">
+          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[#ef233c]/60 bg-white shadow-sm">
+            <Sparkles className="h-4 w-4 text-[#d90429]" aria-hidden="true" />
+          </div>
+          <div className="min-w-0">
+            <span className="block truncate font-serif text-sm font-bold uppercase tracking-[0.14em] text-[#2b2d42] sm:text-base">
+              {siteContent.site_title}
+            </span>
+            <span className="hidden truncate text-[10px] tracking-wider text-[#596078] sm:block">
+              {siteContent.site_subtitle}
+            </span>
+          </div>
+        </Link>
 
-      {/* Main Desktop Navbar Links */}
-      <nav className="pointer-events-auto hidden md:flex items-center gap-1 px-4 py-1.5 rounded-full border border-crimson-700/30 bg-white/75 backdrop-blur-md shadow-xl shadow-crimson-900/10 text-xs font-serif">
-        <Link 
-          href="/museum" 
-          className="flex items-center gap-1.5 px-3 py-1 rounded-full text-[#2b2d42] hover:text-white hover:bg-crimson-600 transition"
-        >
-          <Layers className="w-3.5 h-3.5 text-amberGold-400" />
-          <span>ห้องนิทรรศการ</span>
-        </Link>
-        <Link 
-          href="/products" 
-          className="flex items-center gap-1.5 px-3 py-1 rounded-full text-[#2b2d42] hover:text-white hover:bg-crimson-600 transition"
-        >
-          <Package className="w-3.5 h-3.5 text-emerald-400" />
-          <span>ตัวอย่างพฤกษศาสตร์</span>
-        </Link>
-        <Link 
-          href="/articles" 
-          className="flex items-center gap-1.5 px-3 py-1 rounded-full text-[#2b2d42] hover:text-white hover:bg-crimson-600 transition"
-        >
-          <BookOpen className="w-3.5 h-3.5 text-blue-400" />
-          <span>คลังบทความ</span>
-        </Link>
-        <Link 
-          href="/contact" 
-          className="flex items-center gap-1.5 px-3 py-1 rounded-full text-[#2b2d42] hover:text-white hover:bg-crimson-600 transition"
-        >
-          <PhoneCall className="w-3.5 h-3.5 text-amberGold-400" />
-          <span>ติดต่อ</span>
-        </Link>
-      </nav>
+        <NavigationLinks />
 
-      {/* Controls & Admin Link */}
-      <div className="pointer-events-auto flex items-center gap-2 sm:gap-2.5">
-        {!isPortalOpen && (
+        <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
+          {!isPortalOpen && (
+            <button
+              onClick={openPortal}
+              className="hidden items-center gap-1.5 rounded-full border border-[#ef233c]/55 bg-white px-3 py-2 text-[11px] font-medium text-[#2b2d42] transition hover:bg-[#d90429] hover:text-white sm:flex"
+            >
+              <Sparkles className="h-3.5 w-3.5 text-[#d90429]" aria-hidden="true" />
+              <span>ประตูมิติ</span>
+            </button>
+          )}
           <button
-            onClick={openPortal}
-            className="flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-1.5 rounded-full border border-crimson-700/50 bg-white/75 text-[11px] sm:text-xs text-amberGold-600 hover:border-amberGold-500/70 hover:bg-crimson-950 transition shadow-lg shadow-crimson-900/10 backdrop-blur-sm"
+            onClick={toggleAudio}
+            className="rounded-full border border-[#8d99ae]/50 bg-white p-2 text-[#2b2d42] transition hover:border-[#d90429] hover:bg-[#d90429] hover:text-white"
+            title={isAudioMuted ? 'เปิดเสียงบรรยากาศป่า' : 'ปิดเสียงบรรยากาศ'}
+            aria-label={isAudioMuted ? 'เปิดเสียงบรรยากาศป่า' : 'ปิดเสียงบรรยากาศ'}
           >
-            <Sparkles className="w-3.5 h-3.5 text-amberGold-400" />
-            <span>ประตูมิติ</span>
+            {isAudioMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4 text-[#d90429]" />}
           </button>
-        )}
-
-        <button
-          onClick={toggleAudio}
-          className="p-2 sm:p-2.5 rounded-full border border-crimson-700/30 bg-white/75 text-neutral-300 hover:text-amberGold-600 hover:border-amberGold-500/50 transition backdrop-blur-sm shadow-md shadow-crimson-900/10"
-          title={isAudioMuted ? 'เปิดเสียงบรรยากาศป่า' : 'ปิดเสียงบรรยากาศ'}
-        >
-          {isAudioMuted ? <VolumeX className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> : <Volume2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amberGold-400" />}
-        </button>
-
-        <Link
-          href="/admin/login"
-          className="p-2 sm:px-3 sm:py-1.5 rounded-xl border border-crimson-700/30 bg-white/75 text-xs text-neutral-300 hover:text-amberGold-600 hover:border-crimson-600 transition flex items-center gap-1.5 backdrop-blur-sm shadow-sm"
-          title="เข้าสู่ระบบผู้ดูแล (Admin)"
-        >
-          <User className="w-3.5 h-3.5 text-amberGold-400" />
-          <span className="hidden sm:inline">Admin CMS</span>
-        </Link>
+          <Link
+            href="/admin/login"
+            className="flex items-center gap-1.5 rounded-xl border border-[#8d99ae]/50 bg-white px-2.5 py-2 text-[11px] text-[#2b2d42] transition hover:border-[#d90429] hover:bg-[#d90429] hover:text-white sm:px-3"
+            title="เข้าสู่ระบบผู้ดูแล (Admin)"
+          >
+            <User className="h-3.5 w-3.5 text-[#d90429]" aria-hidden="true" />
+            <span className="hidden sm:inline">Admin CMS</span>
+          </Link>
+        </div>
+      </div>
+      <div className="mx-auto mt-2 w-full max-w-7xl md:hidden">
+        <NavigationLinks mobile />
       </div>
     </header>
   );

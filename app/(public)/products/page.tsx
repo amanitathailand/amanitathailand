@@ -43,7 +43,7 @@ export default async function ProductsIndexPage() {
   }
 
   return (
-    <div className="min-h-screen pt-28 pb-20 px-6 max-w-6xl mx-auto">
+    <div className="min-h-screen pt-32 sm:pt-36 pb-20 px-4 sm:px-6 max-w-6xl mx-auto">
       {/* Dynamic Header from CMS */}
       <div className="text-center mb-12">
         <span className="text-xs font-mono uppercase tracking-widest text-amberGold-400">
