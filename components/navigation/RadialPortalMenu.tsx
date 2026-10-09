@@ -7,7 +7,6 @@ import { useMuseumStore } from '@/store/useMuseumStore';
 import { Sparkles, Compass, BookOpen, Layers, PhoneCall, Feather, Package, X, ChevronRight } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import type { PortalMenuIcon, PortalMenuItem } from '@/types';
-import { INITIAL_PORTAL_MENU_ITEMS } from '@/lib/data/portalMenu';
 import { trackEvent } from '@/lib/analytics/tracker';
 
 const PORTAL_ICONS: Partial<Record<Exclude<PortalMenuIcon, 'none'>, LucideIcon>> = {
@@ -50,7 +49,8 @@ function isPortalMenuItem(value: unknown): value is PortalMenuItem {
 export function RadialPortalMenu() {
   const { isPortalOpen, closePortal } = useMuseumStore();
   const [isMobile, setIsMobile] = useState(false);
-  const [menuItems, setMenuItems] = useState<PortalMenuItem[]>(INITIAL_PORTAL_MENU_ITEMS);
+  const [menuItems, setMenuItems] = useState<PortalMenuItem[]>([]);
+  const [menuLoaded, setMenuLoaded] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -63,6 +63,7 @@ export function RadialPortalMenu() {
     if (!isPortalOpen) return;
 
     let cancelled = false;
+    setMenuLoaded(false);
     fetch('/api/settings', { cache: 'no-store' })
       .then(async (response) => {
         const result = await response.json();
@@ -70,13 +71,19 @@ export function RadialPortalMenu() {
         const savedItems = result.site.portal_menu_items.filter(isPortalMenuItem).sort(
           (a: PortalMenuItem, b: PortalMenuItem) => a.sort_order - b.sort_order
         );
-        if (!cancelled) setMenuItems(savedItems);
+        if (!cancelled) {
+          setMenuItems(savedItems);
+          setMenuLoaded(true);
+        }
       })
-      .catch((error) => console.warn('Load radial portal menu notice:', error));
+      .catch((error) => {
+        console.warn('Load radial portal menu notice:', error);
+        if (!cancelled) setMenuLoaded(true);
+      });
     return () => { cancelled = true; };
   }, [isPortalOpen]);
 
-  const activeItems = menuItems
+  const activeItems = (menuLoaded ? menuItems : [])
     .filter((item) => item.status === 'published')
     .sort((a, b) => a.sort_order - b.sort_order);
   const radius = Math.min(285, 230 + Math.max(0, activeItems.length - 7) * 8);

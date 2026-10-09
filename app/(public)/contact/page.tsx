@@ -28,6 +28,7 @@ import {
 export default function ContactPage() {
   const [settings, setSettings] = useState<ContactSettings>(INITIAL_CONTACT_SETTINGS);
   const [loadingSettings, setLoadingSettings] = useState(true);
+  const [settingsError, setSettingsError] = useState(false);
   const [form, setForm] = useState({ name: '', email: '', phoneOrLine: '', message: '' });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -50,12 +51,34 @@ export default function ContactPage() {
         if (json.contact) setSettings(prev => ({ ...prev, ...json.contact }));
       } catch (apiErr) {
         console.warn('API settings query notice:', apiErr);
+        setSettingsError(true);
       } finally {
         setLoadingSettings(false);
       }
     };
     fetchContactSettings();
   }, []);
+
+  if (loadingSettings) {
+    return (
+      <div className="min-h-[100dvh] pt-32 px-4 flex items-start justify-center">
+        <div className="flex items-center gap-3 rounded-2xl border border-[#8d99ae]/40 bg-white/90 px-5 py-4 text-sm text-[#2b2d42] shadow-sm">
+          <span className="h-4 w-4 animate-spin rounded-full border-2 border-[#d90429] border-t-transparent" />
+          กำลังโหลดข้อมูลติดต่อปัจจุบันจากฐานข้อมูล...
+        </div>
+      </div>
+    );
+  }
+
+  if (settingsError) {
+    return (
+      <div className="min-h-[100dvh] pt-32 px-4 flex items-start justify-center text-center">
+        <p className="rounded-2xl border border-[#d90429]/30 bg-white px-5 py-4 text-sm text-[#2b2d42] shadow-sm">
+          ไม่สามารถอ่านข้อมูลติดต่อปัจจุบันจากฐานข้อมูลได้ กรุณารีเฟรชหน้าเว็บอีกครั้ง
+        </p>
+      </div>
+    );
+  }
 
   const handlePreSubmit = (e: React.FormEvent) => {
     e.preventDefault();

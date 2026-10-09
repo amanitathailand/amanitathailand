@@ -39,7 +39,8 @@ function NavigationLinks({ mobile = false }: { mobile?: boolean }) {
 
 export function PublicHeader() {
   const { isPortalOpen, openPortal, isAudioMuted, toggleAudio } = useMuseumStore();
-  const [siteContent, setSiteContent] = useState<SiteContentSettings>(INITIAL_SITE_CONTENT);
+  const [siteContent, setSiteContent] = useState<SiteContentSettings | null>(null);
+  const [settingsError, setSettingsError] = useState(false);
 
   useEffect(() => {
     let active = true;
@@ -49,7 +50,10 @@ export function PublicHeader() {
         if (!response.ok || !result.success) throw new Error(result.error || 'อ่านชื่อเว็บไซต์ไม่สำเร็จ');
         if (active && result.site) setSiteContent({ ...INITIAL_SITE_CONTENT, ...result.site });
       })
-      .catch((error) => console.warn('Public header settings notice:', error));
+      .catch((error) => {
+        console.warn('Public header settings notice:', error);
+        if (active) setSettingsError(true);
+      });
     return () => { active = false; };
   }, []);
 
@@ -62,10 +66,10 @@ export function PublicHeader() {
           </div>
           <div className="min-w-0">
             <span className="block truncate font-serif text-sm font-bold uppercase tracking-[0.14em] text-[#2b2d42] sm:text-base">
-              {siteContent.site_title}
+              {siteContent?.site_title || (settingsError ? 'ไม่สามารถโหลดข้อมูลเว็บไซต์' : 'กำลังโหลดข้อมูลเว็บไซต์...')}
             </span>
             <span className="hidden truncate text-[10px] tracking-wider text-[#596078] sm:block">
-              {siteContent.site_subtitle}
+              {siteContent?.site_subtitle || (settingsError ? 'กรุณารีเฟรชหน้าเว็บ' : 'กำลังอ่านข้อมูลล่าสุดจากฐานข้อมูล')}
             </span>
           </div>
         </Link>

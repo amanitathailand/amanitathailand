@@ -42,6 +42,7 @@ export default function HomePage() {
   const [siteContent, setSiteContent] = useState<SiteContentSettings>(INITIAL_SITE_CONTENT);
   const [displayMode, setDisplayMode] = useState<'3d' | 'real_photo'>(INITIAL_SITE_CONTENT.home_display_mode || '3d');
   const [settingsLoaded, setSettingsLoaded] = useState(false);
+  const [settingsError, setSettingsError] = useState(false);
   
   // Parallax tilt state for Real Photo mode
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
@@ -61,6 +62,7 @@ export default function HomePage() {
         }
       } catch (err) {
         console.warn('Load home settings notice:', err);
+        setSettingsError(true);
       } finally {
         setSettingsLoaded(true);
       }
@@ -77,6 +79,27 @@ export default function HomePage() {
     const y = (clientY / innerHeight - 0.5) * -20;
     setTilt({ x, y });
   };
+
+  if (!settingsLoaded) {
+    return (
+      <div className="relative flex h-[100dvh] w-screen items-center justify-center bg-[#edf2f4]">
+        <div className="flex items-center gap-3 rounded-2xl border border-[#8d99ae]/40 bg-white/90 px-5 py-4 text-sm text-[#2b2d42] shadow-sm">
+          <span className="h-4 w-4 animate-spin rounded-full border-2 border-[#d90429] border-t-transparent" />
+          กำลังโหลดข้อมูลปัจจุบันจากฐานข้อมูล...
+        </div>
+      </div>
+    );
+  }
+
+  if (settingsError) {
+    return (
+      <div className="flex h-[100dvh] w-screen items-center justify-center bg-[#edf2f4] px-5 text-center">
+        <p className="rounded-2xl border border-[#d90429]/30 bg-white px-5 py-4 text-sm text-[#2b2d42] shadow-sm">
+          ไม่สามารถอ่านข้อมูลปัจจุบันจากฐานข้อมูลได้ กรุณารีเฟรชหน้าเว็บอีกครั้ง
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div 
