@@ -62,7 +62,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   ];
 
   return (
-    <div className="min-h-screen bg-obsidian-950 text-mushroomWhite flex flex-col md:flex-row">
+    <div lang="th" className="min-h-screen bg-obsidian-950 text-mushroomWhite flex flex-col md:flex-row">
       {/* Mobile Header Bar */}
       <div className="md:hidden flex items-center justify-between p-4 border-b border-crimson-700/30 bg-white/80 sticky top-0 z-30 shadow-sm">
         <div>
