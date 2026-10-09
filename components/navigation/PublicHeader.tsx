@@ -1,10 +1,9 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { useMuseumStore } from '@/store/useMuseumStore';
 import { Volume2, VolumeX, Sparkles, User, Layers, BookOpen, Package, PhoneCall, Home } from 'lucide-react';
-import { INITIAL_SITE_CONTENT } from '@/lib/data/initialData';
 import type { SiteContentSettings } from '@/types';
 
 const navItems = [
@@ -37,25 +36,9 @@ function NavigationLinks({ mobile = false }: { mobile?: boolean }) {
   );
 }
 
-export function PublicHeader() {
+export function PublicHeader({ initialSiteContent }: { initialSiteContent?: SiteContentSettings }) {
   const { isPortalOpen, openPortal, isAudioMuted, toggleAudio } = useMuseumStore();
-  const [siteContent, setSiteContent] = useState<SiteContentSettings | null>(null);
-  const [settingsError, setSettingsError] = useState(false);
-
-  useEffect(() => {
-    let active = true;
-    fetch('/api/settings', { cache: 'no-store' })
-      .then(async (response) => {
-        const result = await response.json();
-        if (!response.ok || !result.success) throw new Error(result.error || 'อ่านชื่อเว็บไซต์ไม่สำเร็จ');
-        if (active && result.site) setSiteContent({ ...INITIAL_SITE_CONTENT, ...result.site });
-      })
-      .catch((error) => {
-        console.warn('Public header settings notice:', error);
-        if (active) setSettingsError(true);
-      });
-    return () => { active = false; };
-  }, []);
+  const [siteContent] = useState<SiteContentSettings | null>(initialSiteContent || null);
 
   return (
     <header className="fixed inset-x-0 top-0 z-40 border-b border-[#8d99ae]/35 bg-white/95 px-3 py-2 shadow-sm backdrop-blur-xl sm:px-5 sm:py-3">
@@ -66,10 +49,10 @@ export function PublicHeader() {
           </div>
           <div className="min-w-0">
             <span className="block truncate font-serif text-sm font-bold uppercase tracking-[0.14em] text-[#2b2d42] sm:text-base">
-              {siteContent?.site_title || (settingsError ? 'ไม่สามารถโหลดข้อมูลเว็บไซต์' : 'กำลังโหลดข้อมูลเว็บไซต์...')}
+              {siteContent?.site_title || 'ไม่สามารถโหลดข้อมูลเว็บไซต์'}
             </span>
             <span className="hidden truncate text-[10px] tracking-wider text-[#596078] sm:block">
-              {siteContent?.site_subtitle || (settingsError ? 'กรุณารีเฟรชหน้าเว็บ' : 'กำลังอ่านข้อมูลล่าสุดจากฐานข้อมูล')}
+              {siteContent?.site_subtitle || 'กรุณารีเฟรชหน้าเว็บ'}
             </span>
           </div>
         </Link>

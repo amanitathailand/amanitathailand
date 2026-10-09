@@ -46,11 +46,10 @@ function isPortalMenuItem(value: unknown): value is PortalMenuItem {
     && (item.image_url === undefined || item.image_url === '' || isSafeImageUrl(item.image_url));
 }
 
-export function RadialPortalMenu() {
+export function RadialPortalMenu({ initialItems = [] }: { initialItems?: PortalMenuItem[] }) {
   const { isPortalOpen, closePortal } = useMuseumStore();
   const [isMobile, setIsMobile] = useState(false);
-  const [menuItems, setMenuItems] = useState<PortalMenuItem[]>([]);
-  const [menuLoaded, setMenuLoaded] = useState(false);
+  const [menuItems] = useState<PortalMenuItem[]>(initialItems);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -59,31 +58,7 @@ export function RadialPortalMenu() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  useEffect(() => {
-    if (!isPortalOpen) return;
-
-    let cancelled = false;
-    setMenuLoaded(false);
-    fetch('/api/settings', { cache: 'no-store' })
-      .then(async (response) => {
-        const result = await response.json();
-        if (!response.ok || !result.success || !Array.isArray(result.site?.portal_menu_items)) return;
-        const savedItems = result.site.portal_menu_items.filter(isPortalMenuItem).sort(
-          (a: PortalMenuItem, b: PortalMenuItem) => a.sort_order - b.sort_order
-        );
-        if (!cancelled) {
-          setMenuItems(savedItems);
-          setMenuLoaded(true);
-        }
-      })
-      .catch((error) => {
-        console.warn('Load radial portal menu notice:', error);
-        if (!cancelled) setMenuLoaded(true);
-      });
-    return () => { cancelled = true; };
-  }, [isPortalOpen]);
-
-  const activeItems = (menuLoaded ? menuItems : [])
+  const activeItems = menuItems
     .filter((item) => item.status === 'published')
     .sort((a, b) => a.sort_order - b.sort_order);
   const radius = Math.min(285, 230 + Math.max(0, activeItems.length - 7) * 8);
