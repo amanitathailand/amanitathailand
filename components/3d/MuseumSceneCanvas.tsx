@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
@@ -78,8 +78,8 @@ export function MuseumSceneCanvas({ modelUrl = '/models/amanita.glb' }: { modelU
     try {
       // --- Scene Setup ---
       const scene = new THREE.Scene();
-      scene.background = new THREE.Color('#ffe0e5');
-      scene.fog = new THREE.FogExp2('#ffd0d8', 0.045);
+      scene.background = new THREE.Color('#edf2f4');
+      scene.fog = new THREE.FogExp2('#dfe5e9', 0.045);
 
       // --- Camera Setup with Mobile Awareness ---
       const width = container.clientWidth || window.innerWidth;
@@ -121,11 +121,11 @@ export function MuseumSceneCanvas({ modelUrl = '/models/amanita.glb' }: { modelU
       }
 
       // --- Photorealistic Studio Lighting ---
-      const ambientLight = new THREE.AmbientLight(0xfff7ed, 0.55);
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
       scene.add(ambientLight);
 
       // Key light: Warm sunlit forest canopy angle
-      const keyLight = new THREE.DirectionalLight(0xfffaea, 1.4);
+      const keyLight = new THREE.DirectionalLight(0xffffff, 1.5);
       keyLight.position.set(4.5, 9, 3.5);
       keyLight.castShadow = true;
       keyLight.shadow.mapSize.width = 1024;
@@ -133,12 +133,12 @@ export function MuseumSceneCanvas({ modelUrl = '/models/amanita.glb' }: { modelU
       scene.add(keyLight);
 
       // Rim light: Vibrant crimson back-glow (translucency simulation)
-      const rimLight = new THREE.PointLight(0xdf7182, 1.35, 8.5);
+      const rimLight = new THREE.PointLight(0xef233c, 1.15, 8.5);
       rimLight.position.set(-3.5, 2.5, -2.5);
       scene.add(rimLight);
 
       // Fill light: Gentle forest moss green tone
-      const fillLight = new THREE.DirectionalLight(0xffd9df, 0.65);
+      const fillLight = new THREE.DirectionalLight(0x8d99ae, 0.55);
       fillLight.position.set(0, -3, 3);
       scene.add(fillLight);
 
@@ -588,3 +588,4 @@ export function MuseumSceneCanvas({ modelUrl = '/models/amanita.glb' }: { modelU
 }
 
 export default MuseumSceneCanvas;
+

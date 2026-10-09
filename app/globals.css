@@ -3,16 +3,16 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffe9ed;
-  --foreground: #4a202b;
+  --background: #edf2f4;
+  --foreground: #2b2d42;
 }
 
 body {
   background-color: var(--background);
   background-image:
-    radial-gradient(circle at 10% 5%, rgba(207, 83, 104, 0.30), transparent 30%),
-    radial-gradient(circle at 90% 15%, rgba(255, 255, 255, 0.94), transparent 34%),
-    linear-gradient(135deg, #fff2f4 0%, #ffdfe5 48%, #fff7f8 100%);
+    radial-gradient(circle at 10% 5%, rgba(239, 35, 60, 0.16), transparent 30%),
+    radial-gradient(circle at 90% 15%, rgba(255, 255, 255, 0.95), transparent 34%),
+    linear-gradient(135deg, #edf2f4 0%, #ffffff 52%, #e7edf0 100%);
   background-attachment: fixed;
   color: var(--foreground);
   overflow-x: hidden;
@@ -22,21 +22,26 @@ body {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #ffdbe2;
+  background: #dfe5e9;
 }
 ::-webkit-scrollbar-thumb {
-  background: #d7657b;
+  background: #8d99ae;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #b53b52;
+  background: #d90429;
 }
 
 @layer utilities {
-  .text-neutral-300 { color: #5f2c3a !important; }
-  .text-neutral-400 { color: #754455 !important; }
-  .text-neutral-500 { color: #845466 !important; }
-  .text-neutral-700 { color: #9a6474 !important; }
-  .text-neutral-800 { color: #b77887 !important; }
-  .text-neutral-900 { color: #4a202b !important; }
+  .text-neutral-300 { color: #2b2d42 !important; }
+  .text-neutral-400 { color: #596078 !important; }
+  .text-neutral-500 { color: #6f788d !important; }
+  .text-neutral-700 { color: #8d99ae !important; }
+  .text-neutral-800 { color: #aab4c1 !important; }
+  .text-neutral-900 { color: #2b2d42 !important; }
+
+  h1, h2, h3, h4, h5, h6 { color: #2b2d42; }
+  input, textarea, select { color: #2b2d42; background-color: #ffffff; }
+  input::placeholder, textarea::placeholder { color: #8d99ae; opacity: 1; }
+  ::selection { background: #ef233c; color: #ffffff; }
 }

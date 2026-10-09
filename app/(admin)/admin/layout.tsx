@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
@@ -49,16 +49,16 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   }
 
   const navLinks = [
-    { label: 'แดชบอร์ดสถิติ', href: '/admin/dashboard', icon: LayoutDashboard },
-    { label: 'คำสั่งซื้อ & สลิป', href: '/admin/orders', icon: ShoppingBag },
-    { label: 'ช่องทางติดต่อ & พร้อมเพย์', href: '/admin/contact', icon: PhoneCall },
-    { label: 'แก้ไขหัวข้อหลักเว็บ', href: '/admin/site-content', icon: Type },
-    { label: 'จัดการห้องจัดแสดง', href: '/admin/museum', icon: Layers },
-    { label: 'จัดการบทความ', href: '/admin/articles', icon: BookOpen },
-    { label: 'ตัวอย่างพฤกษศาสตร์', href: '/admin/products', icon: Package },
+    { label: 'เนเธ”เธเธเธญเธฃเนเธ”เธชเธ–เธดเธ•เธด', href: '/admin/dashboard', icon: LayoutDashboard },
+    { label: 'เธเธณเธชเธฑเนเธเธเธทเนเธญ & เธชเธฅเธดเธ', href: '/admin/orders', icon: ShoppingBag },
+    { label: 'เธเนเธญเธเธ—เธฒเธเธ•เธดเธ”เธ•เนเธญ & เธเธฃเนเธญเธกเน€เธเธขเน', href: '/admin/contact', icon: PhoneCall },
+    { label: 'เนเธเนเนเธเธซเธฑเธงเธเนเธญเธซเธฅเธฑเธเน€เธงเนเธ', href: '/admin/site-content', icon: Type },
+    { label: 'เธเธฑเธ”เธเธฒเธฃเธซเนเธญเธเธเธฑเธ”เนเธชเธ”เธ', href: '/admin/museum', icon: Layers },
+    { label: 'เธเธฑเธ”เธเธฒเธฃเธเธ—เธเธงเธฒเธก', href: '/admin/articles', icon: BookOpen },
+    { label: 'เธ•เธฑเธงเธญเธขเนเธฒเธเธเธคเธเธฉเธจเธฒเธชเธ•เธฃเน', href: '/admin/products', icon: Package },
     { label: 'Tracking Pixels', href: '/admin/pixels', icon: Sliders },
-    { label: 'แจ้งเตือนผ่าน LINE', href: '/admin/line-notify', icon: BellRing },
-    { label: 'คลังสื่อ (Media)', href: '/admin/media', icon: ImageIcon },
+    { label: 'เนเธเนเธเน€เธ•เธทเธญเธเธเนเธฒเธ LINE', href: '/admin/line-notify', icon: BellRing },
+    { label: 'เธเธฅเธฑเธเธชเธทเนเธญ (Media)', href: '/admin/media', icon: ImageIcon },
   ];
 
   return (
@@ -66,7 +66,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       {/* Mobile Header Bar */}
       <div className="md:hidden flex items-center justify-between p-4 border-b border-crimson-700/30 bg-white/80 sticky top-0 z-30 shadow-sm">
         <div>
-          <span className="text-xs font-mono uppercase text-amberGold-400 font-bold block">Amanita Thailand</span>
+          <span className="text-xs font-mono uppercase text-crimson-600 font-bold block">Amanita Thailand</span>
           <span className="text-sm font-serif font-bold text-mushroomWhite">CMS Admin</span>
         </div>
         <button
@@ -89,7 +89,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             </span>
             <span className="text-base font-serif font-bold text-mushroomWhite block">CMS & Analytics Portal</span>
             {userEmail && (
-              <span className="text-[11px] text-emerald-400 font-mono block mt-1">● {userEmail}</span>
+              <span className="text-[11px] text-emerald-400 font-mono block mt-1">โ— {userEmail}</span>
             )}
           </div>
 
@@ -105,7 +105,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                   className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition ${
                     isActive 
                     ? 'bg-crimson-700 text-white border border-crimson-600 shadow-md shadow-crimson-900/20 font-semibold'
-                    : 'hover:bg-crimson-950 text-neutral-300 hover:text-amberGold-600'
+                    : 'hover:bg-crimson-950 text-[#2b2d42] hover:text-crimson-600'
                   }`}
                 >
                   <Icon className={`w-4 h-4 ${isActive ? 'text-amberGold-400' : 'text-neutral-400'}`} />
@@ -119,17 +119,17 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <div className="pt-6 border-t border-neutral-800 space-y-3">
           <Link 
             href="/" 
-            className="flex items-center gap-2 text-xs text-neutral-400 hover:text-amberGold-300 transition"
+            className="flex items-center gap-2 text-xs text-[#596078] hover:text-crimson-600 transition"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
-            กลับไปหน้าพิพิธภัณฑ์ 3D
+            เธเธฅเธฑเธเนเธเธซเธเนเธฒเธเธดเธเธดเธเธ เธฑเธ“เธ‘เน 3D
           </Link>
           <button
             onClick={handleLogout}
-            className="w-full flex items-center gap-2 px-3 py-2 rounded-lg bg-crimson-950 hover:bg-crimson-900 text-neutral-400 hover:text-amberGold-600 text-xs transition border border-crimson-700/30"
+            className="w-full flex items-center gap-2 px-3 py-2 rounded-lg bg-crimson-950 hover:bg-crimson-900 text-[#596078] hover:text-white text-xs transition border border-crimson-700/30"
           >
             <LogOut className="w-3.5 h-3.5" />
-            ออกจากระบบ (Sign Out)
+            เธญเธญเธเธเธฒเธเธฃเธฐเธเธ (Sign Out)
           </button>
         </div>
       </aside>
@@ -141,3 +141,4 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     </div>
   );
 }
+

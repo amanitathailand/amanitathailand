@@ -11,26 +11,26 @@ export default {
     extend: {
       colors: {
         crimson: {
-          950: '#fff0f2',
-          900: '#ffd9df',
-          800: '#f7b5c0',
-          700: '#e98293',
-          600: '#cf5368',
-          500: '#b53b52'
+          950: '#edf2f4',
+          900: '#dfe5e9',
+          800: '#f7a1ab',
+          700: '#ef233c',
+          600: '#d90429',
+          500: '#b80324'
         },
         obsidian: {
-          950: '#fff7f8',
-          900: '#ffe9ed',
-          850: '#ffdde3',
-          800: '#ffd0d8'
+          950: '#edf2f4',
+          900: '#ffffff',
+          850: '#f4f6f7',
+          800: '#dfe5e9'
         },
         amberGold: {
-          400: '#a83a52',
-          500: '#8f2c43',
-          600: '#731f35'
+          400: '#ef233c',
+          500: '#d90429',
+          600: '#b80324'
         },
-        mushroomWhite: '#4a202b',
-        forestMoss: '#7c4652'
+        mushroomWhite: '#2b2d42',
+        forestMoss: '#8d99ae'
       },
       fontFamily: {
         serif: ['var(--font-serif)', 'Cinzel', 'Playfair Display', 'Sarabun', 'serif'],

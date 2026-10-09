@@ -13,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="th" style={{ backgroundColor: '#070b08', color: '#f5f3eb' }}>
+    <html lang="th">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -22,10 +22,7 @@ export default function RootLayout({
           rel="stylesheet" 
         />
       </head>
-      <body 
-        className="antialiased bg-[#070b08] text-[#f5f3eb]"
-        style={{ backgroundColor: '#070b08', color: '#f5f3eb', minHeight: '100vh', margin: 0 }}
-      >
+      <body className="antialiased min-h-screen m-0">
         {children}
       </body>
     </html>
