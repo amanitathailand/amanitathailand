@@ -1,0 +1,28 @@
+# Local secrets and environment values
+.env*
+!.env.example
+
+# Package managers / credentials
+.npmrc
+
+# Dependencies and build output
+node_modules/
+.next/
+.next-*
+out/
+build/
+dist/
+coverage/
+tsconfig.tsbuildinfo
+
+# Deployment and local agent state
+.vercel/
+.manus/
+.work/
+
+# Operating system / editor artifacts
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log

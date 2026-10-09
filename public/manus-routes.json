@@ -1,0 +1,23 @@
+{
+  "routes": [
+    { "path": "/", "title": "Amanita Thailand Digital Museum" },
+    { "path": "/museum", "title": "ห้องจัดแสดงทั้งหมด" },
+    { "path": "/museum/:hallSlug", "title": "ห้องจัดแสดง" },
+    { "path": "/products", "title": "ตัวอย่างพฤกษศาสตร์" },
+    { "path": "/products/:slug", "title": "รายละเอียดตัวอย่างพฤกษศาสตร์" },
+    { "path": "/articles", "title": "คลังบทความ" },
+    { "path": "/articles/:slug", "title": "บทความ" },
+    { "path": "/contact", "title": "ติดต่อพิพิธภัณฑ์" },
+    { "path": "/admin/login", "title": "เข้าสู่ระบบผู้ดูแล" },
+    { "path": "/admin/dashboard", "title": "แดชบอร์ดผู้ดูแล" },
+    { "path": "/admin/orders", "title": "คำสั่งซื้อ" },
+    { "path": "/admin/contact", "title": "ช่องทางติดต่อ" },
+    { "path": "/admin/site-content", "title": "เนื้อหาเว็บไซต์" },
+    { "path": "/admin/museum", "title": "จัดการนิทรรศการ" },
+    { "path": "/admin/articles", "title": "จัดการบทความ" },
+    { "path": "/admin/products", "title": "จัดการตัวอย่างพฤกษศาสตร์" },
+    { "path": "/admin/pixels", "title": "Tracking Pixels" },
+    { "path": "/admin/line-notify", "title": "แจ้งเตือน LINE" },
+    { "path": "/admin/media", "title": "คลังสื่อ" }
+  ]
+}
