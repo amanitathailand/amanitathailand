@@ -84,7 +84,7 @@ export function ProductsCatalog({ products, siteContent }: ProductsCatalogProps)
                         >
                           <span className="text-amberGold-400 font-bold">{v.size}</span>
                           <span>•</span>
-                          <span className="text-emerald-400 font-bold">฿{v.price ? v.price.toLocaleString() : startingPrice.toLocaleString()}</span>
+                          <span className="text-[#d90429] font-bold">฿{v.price ? v.price.toLocaleString() : startingPrice.toLocaleString()}</span>
                         </div>
                       ))}
                     </div>
@@ -132,7 +132,7 @@ export function ProductsCatalog({ products, siteContent }: ProductsCatalogProps)
                     {/* Details Link */}
                     <Link
                       href={`/products/${prod.slug}`}
-                      className="p-2 text-neutral-400 hover:text-amberGold-300 transition"
+                      className="btn-outline p-2 rounded-xl transition"
                       title="ดูรายละเอียดเชิงลึก"
                     >
                       <ArrowRight className="w-4 h-4" />

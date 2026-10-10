@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Product, SiteContentSettings } from '@/types';
 import { OrderModal } from '@/components/shop/OrderModal';
 import Link from 'next/link';
-import { ArrowLeft, MessageCircle, ShoppingBag, ShieldAlert, Check, QrCode, ExternalLink } from 'lucide-react';
+import { ArrowLeft, MessageCircle, ShoppingBag, ShieldAlert, QrCode, ExternalLink } from 'lucide-react';
 
 interface ProductDetailViewProps {
   product: Product;
@@ -71,9 +71,8 @@ export function ProductDetailView({ product, siteContent }: ProductDetailViewPro
                   >
                     <div className="flex items-center justify-between mb-1">
                       <span className="font-bold text-amberGold-300">{v.size}</span>
-                      <span className="text-emerald-400 font-bold">฿{v.price ? v.price.toLocaleString() : (product.price || 590).toLocaleString()}</span>
+                      <span className="text-[#d90429] font-bold">฿{v.price ? v.price.toLocaleString() : (product.price || 590).toLocaleString()}</span>
                     </div>
-                    {v.note && <span className="text-neutral-500 text-[10px]">{v.note}</span>}
                   </div>
                 ))}
               </div>
@@ -116,7 +115,7 @@ export function ProductDetailView({ product, siteContent }: ProductDetailViewPro
                 rel="noreferrer"
                 className="btn-line flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-mono font-semibold transition"
               >
-                <MessageCircle className="w-4 h-4 text-[#06C755]" />
+                <MessageCircle className="w-4 h-4 text-white" />
                 <span>สอบถาม LINE OA</span>
               </a>
             </div>

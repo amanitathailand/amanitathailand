@@ -293,7 +293,7 @@ export default function ContactClient({ initialSettings }: { initialSettings: Co
               </div>
               <div>
                 <span className="text-neutral-500 block text-[10px]">ชื่อบัญชี</span>
-                <span className="font-medium text-white">{settings.promptpay_name}</span>
+                <span className="font-bold text-[#2b2d42]">{settings.promptpay_name}</span>
               </div>
               <div className="col-span-2 pt-1 border-t border-neutral-800/80 flex items-center justify-between text-[11px] text-neutral-400">
                 <span>ธนาคาร: {settings.promptpay_bank}</span>
