@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Product, SiteContentSettings } from '@/types';
 import { OrderModal } from '@/components/shop/OrderModal';
+import { ImageLightbox } from '@/components/media/ImageLightbox';
 import Link from 'next/link';
 import { ArrowLeft, MessageCircle, ShoppingBag, ShieldAlert, QrCode, ExternalLink } from 'lucide-react';
 
@@ -30,10 +31,10 @@ export function ProductDetailView({ product, siteContent }: ProductDetailViewPro
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 bg-white p-6 sm:p-8 rounded-3xl border border-[#8d99ae]/55 shadow-[0_12px_30px_rgba(43,45,66,0.12)]">
         <div className="relative rounded-2xl overflow-hidden bg-neutral-900 h-96">
-          <img 
-            src={product.hero_image_url} 
-            alt={product.name}
-                className="w-full h-full object-cover"
+          <ImageLightbox
+            images={[{ src: product.hero_image_url, alt: product.name }]}
+            imageClassName="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+            triggerClassName="group relative block h-full w-full cursor-zoom-in"
           />
           {product.shopee_url && (
             <div className="absolute top-4 right-4 bg-[#EE4D2D] text-white px-3.5 py-1 rounded-full text-xs font-mono font-bold flex items-center gap-1.5 shadow-xl">

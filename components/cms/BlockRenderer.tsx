@@ -3,6 +3,7 @@
 import React from 'react';
 import { ContentBlock } from '@/types';
 import { Quote, AlertCircle, ExternalLink, Layers } from 'lucide-react';
+import { ImageLightbox } from '@/components/media/ImageLightbox';
 
 interface BlockRendererProps {
   blocks: ContentBlock[];
@@ -42,7 +43,11 @@ export function BlockRenderer({ blocks }: BlockRendererProps) {
             const data = block.data as { url: string; caption?: string; alt?: string };
             return (
               <figure key={block.id} className="my-6 rounded-xl overflow-hidden border border-crimson-950/80 bg-obsidian-950/60 shadow-xl">
-                <img src={data.url} alt={data.alt || 'นิทรรศการภาพ Amanita'} className="w-full h-auto object-cover max-h-[500px]" />
+                <ImageLightbox
+                  images={[{ src: data.url, alt: data.alt || 'นิทรรศการภาพ Amanita', caption: data.caption }]}
+                  imageClassName="w-full h-auto max-h-[500px] object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                  triggerClassName="group relative block w-full cursor-zoom-in overflow-hidden"
+                />
                 {data.caption && <figcaption className="p-3 text-xs text-center text-neutral-400 font-mono italic">{data.caption}</figcaption>}
               </figure>
             );
@@ -54,7 +59,12 @@ export function BlockRenderer({ blocks }: BlockRendererProps) {
               <div key={block.id} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-6">
                 {(data.items || []).map((img, i) => (
                   <div key={i} className="rounded-lg overflow-hidden border border-neutral-800 bg-obsidian-900">
-                    <img src={img.url} alt="Gallery" className="w-full h-48 object-cover hover:scale-105 transition duration-300" />
+                    <ImageLightbox
+                      images={(data.items || []).map((item) => ({ src: item.url, caption: item.caption, alt: 'ภาพจาก Gallery' }))}
+                      initialIndex={i}
+                      imageClassName="w-full h-48 object-cover transition duration-300 group-hover:scale-105"
+                      triggerClassName="group relative block w-full cursor-zoom-in overflow-hidden"
+                    />
                     {img.caption && <p className="p-2 text-xs text-neutral-400">{img.caption}</p>}
                   </div>
                 ))}

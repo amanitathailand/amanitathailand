@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Product, SiteContentSettings } from '@/types';
 import { OrderModal } from '@/components/shop/OrderModal';
+import { ImageLightbox } from '@/components/media/ImageLightbox';
 import Link from 'next/link';
 import { 
   ShoppingBag, 
@@ -41,10 +42,10 @@ export function ProductsCatalog({ products, siteContent }: ProductsCatalogProps)
             >
               {/* Product Hero Image */}
               <div className="relative h-72 overflow-hidden bg-[#dfe5e9]">
-                <img 
-                  src={prod.hero_image_url || 'https://images.unsplash.com/photo-1543857778-c4a1a3e0b2eb?q=80&w=1200&auto=format&fit=crop'} 
-                  alt={prod.name}
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                <ImageLightbox
+                  images={[{ src: prod.hero_image_url || 'https://images.unsplash.com/photo-1543857778-c4a1a3e0b2eb?q=80&w=1200&auto=format&fit=crop', alt: prod.name }]}
+                  imageClassName="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  triggerClassName="group relative block h-full w-full cursor-zoom-in"
                 />
                 
                 {/* Botanical Badge */}
