@@ -22,18 +22,18 @@ export function ProductDetailView({ product, siteContent }: ProductDetailViewPro
     <div>
       <Link 
         href="/products" 
-        className="inline-flex items-center gap-2 text-xs text-neutral-400 hover:text-amberGold-300 mb-8 font-mono"
+        className="btn-link inline-flex items-center gap-2 text-xs mb-8 font-mono"
       >
         <ArrowLeft className="w-4 h-4" />
         กลับไปยังคลังตัวอย่างทางพฤกษศาสตร์
       </Link>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 bg-obsidian-950/80 p-8 rounded-3xl border border-crimson-900/60 shadow-2xl">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 bg-white p-6 sm:p-8 rounded-3xl border border-[#8d99ae]/55 shadow-[0_12px_30px_rgba(43,45,66,0.12)]">
         <div className="relative rounded-2xl overflow-hidden bg-neutral-900 h-96">
           <img 
             src={product.hero_image_url} 
             alt={product.name}
-            className="w-full h-full object-cover"
+                className="w-full h-full object-cover"
           />
           {product.shopee_url && (
             <div className="absolute top-4 right-4 bg-[#EE4D2D] text-white px-3.5 py-1 rounded-full text-xs font-mono font-bold flex items-center gap-1.5 shadow-xl">
@@ -89,7 +89,7 @@ export function ProductDetailView({ product, siteContent }: ProductDetailViewPro
             {/* Direct Order Button */}
             <button
               onClick={() => setIsOrderOpen(true)}
-              className="w-full py-3.5 rounded-xl bg-gradient-to-r from-amberGold-600 to-amberGold-500 hover:from-amberGold-500 hover:to-amberGold-400 text-obsidian-950 font-serif font-bold text-sm tracking-wide transition-all shadow-xl flex items-center justify-center gap-2"
+              className="btn-primary w-full py-3.5 rounded-xl font-serif font-bold text-sm tracking-wide transition-all flex items-center justify-center gap-2"
             >
               <QrCode className="w-4 h-4" />
               <span>สั่งซื้อทันที (สแกน PromptPay QR ยอดจริง & แนบสลิป)</span>
@@ -102,7 +102,7 @@ export function ProductDetailView({ product, siteContent }: ProductDetailViewPro
                   href={product.shopee_url}
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#EE4D2D] hover:bg-[#d63d1e] text-white text-xs font-mono font-bold transition shadow-md"
+                  className="btn-shopee flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-mono font-bold transition shadow-md"
                 >
                   <ShoppingBag className="w-4 h-4" />
                   <span>สั่งซื้อผ่าน Shopee</span>
@@ -114,7 +114,7 @@ export function ProductDetailView({ product, siteContent }: ProductDetailViewPro
                 href={product.line_oa_url}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-[#06C755] bg-[#06C755]/15 hover:bg-[#06C755]/30 text-emerald-300 text-xs font-mono font-semibold transition"
+                className="btn-line flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-mono font-semibold transition"
               >
                 <MessageCircle className="w-4 h-4 text-[#06C755]" />
                 <span>สอบถาม LINE OA</span>

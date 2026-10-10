@@ -541,7 +541,7 @@ export function OrderModal({
                 <button
                   type="button"
                   onClick={() => document.getElementById('slip-upload-input')?.click()}
-                  className="w-full sm:w-auto px-5 py-2.5 rounded-xl border border-dashed border-amberGold-500/60 bg-crimson-950/40 hover:bg-crimson-900/60 text-amberGold-200 text-xs font-serif font-bold transition flex items-center justify-center gap-2"
+                  className="btn-outline w-full sm:w-auto px-5 py-2.5 rounded-xl border-dashed text-xs font-serif font-bold transition flex items-center justify-center gap-2"
                 >
                   <Upload className="w-4 h-4 text-amberGold-400" />
                   <span>{slipFile ? 'เปลี่ยนรูปภาพสลิป' : 'เลือกภาพสลิปจากอุปกรณ์ (Choose Slip)'}</span>
@@ -570,7 +570,7 @@ export function OrderModal({
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-crimson-800 to-amberGold-600 hover:from-crimson-700 hover:to-amberGold-500 text-white font-serif font-bold text-sm tracking-wide transition-all shadow-2xl flex items-center justify-center gap-2 disabled:opacity-50"
+                className="btn-primary w-full py-3.5 rounded-2xl font-serif font-bold text-sm tracking-wide transition-all flex items-center justify-center gap-2 disabled:opacity-50"
               >
                 <CheckCircle2 className="w-5 h-5 text-amberGold-200" />
                 <span>
@@ -656,7 +656,7 @@ export function OrderModal({
               <button
                 type="button"
                 onClick={() => setShowOrderConfirmModal(false)}
-                className="w-full py-2.5 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-neutral-300 text-xs font-semibold"
+                className="btn-outline w-full py-2.5 rounded-xl text-xs font-semibold"
               >
                 กลับไปแก้ไข
               </button>
@@ -664,7 +664,7 @@ export function OrderModal({
                 type="button"
                 onClick={executeFinalOrderSubmit}
                 disabled={submitting}
-                className="w-full py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-obsidian-950 font-bold text-xs flex items-center justify-center gap-1.5 shadow-lg shadow-emerald-500/20"
+                className="btn-secondary w-full py-2.5 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 shadow-lg"
               >
                 <Check className="w-4 h-4" />
                 <span>{submitting ? 'กำลังส่ง...' : 'ยืนยันส่งข้อมูลจริง'}</span>

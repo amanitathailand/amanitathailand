@@ -57,17 +57,17 @@ export default async function ProductsIndexPage() {
         </p>
 
         {/* Feature Badges */}
-        <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 mt-6 text-xs font-mono text-neutral-300">
-          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-obsidian-900 border border-neutral-800">
-            <CreditCard className="w-3.5 h-3.5 text-amberGold-400" />
+        <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 mt-6 text-xs font-mono text-[#2b2d42]">
+          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-[#8d99ae]/55 shadow-sm">
+            <CreditCard className="w-3.5 h-3.5 text-[#d90429]" />
             <span>สแกน PromptPay QR ยอดจริง</span>
           </div>
-          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-obsidian-900 border border-neutral-800">
-            <Truck className="w-3.5 h-3.5 text-emerald-400" />
+          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-[#8d99ae]/55 shadow-sm">
+            <Truck className="w-3.5 h-3.5 text-emerald-700" />
             <span>จัดส่งพัสดุพร้อมแจ้งเลขติดตาม</span>
           </div>
-          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-obsidian-900 border border-neutral-800">
-            <ShieldCheck className="w-3.5 h-3.5 text-blue-400" />
+          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-[#8d99ae]/55 shadow-sm">
+            <ShieldCheck className="w-3.5 h-3.5 text-blue-700" />
             <span>ผู้ดูแลตรวจสอบสลิปและรับแจ้งเตือน LINE</span>
           </div>
         </div>

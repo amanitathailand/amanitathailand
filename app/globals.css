@@ -39,9 +39,45 @@ body {
   .text-neutral-700 { color: #8d99ae !important; }
   .text-neutral-800 { color: #aab4c1 !important; }
   .text-neutral-900 { color: #2b2d42 !important; }
+  .text-emerald-300, .text-emerald-400 { color: #047857 !important; }
+  .text-blue-400 { color: #1d4ed8 !important; }
 
   h1, h2, h3, h4, h5, h6 { color: #2b2d42; }
   input, textarea, select { color: #2b2d42; background-color: #ffffff; }
   input::placeholder, textarea::placeholder { color: #8d99ae; opacity: 1; }
   ::selection { background: #ef233c; color: #ffffff; }
+
+  .btn-primary {
+    background: #d90429;
+    color: #ffffff;
+    border: 1px solid #b80324;
+    box-shadow: 0 8px 18px rgba(217, 4, 41, 0.22);
+  }
+  .btn-primary:hover { background: #b80324; }
+  .btn-secondary {
+    background: #2b2d42;
+    color: #ffffff;
+    border: 1px solid #2b2d42;
+  }
+  .btn-secondary:hover { background: #596078; }
+  .btn-outline {
+    background: #ffffff;
+    color: #2b2d42;
+    border: 1px solid #8d99ae;
+  }
+  .btn-outline:hover { background: #edf2f4; border-color: #d90429; color: #d90429; }
+  .btn-link { color: #2b2d42; }
+  .btn-link:hover { color: #d90429; }
+  .btn-line {
+    background: #06c755;
+    color: #ffffff;
+    border: 1px solid #049b43;
+  }
+  .btn-line:hover { background: #048f3e; }
+  .btn-shopee {
+    background: #ee4d2d;
+    color: #ffffff;
+    border: 1px solid #c83c22;
+  }
+  .btn-shopee:hover { background: #c83c22; }
 }

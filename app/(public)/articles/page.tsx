@@ -53,7 +53,7 @@ export default async function ArticlesIndexPage() {
           <Link
             key={art.id}
             href={`/articles/${art.slug}`}
-            className="group block p-6 rounded-2xl border border-neutral-800 bg-obsidian-950/70 hover:border-amberGold-500/70 transition shadow-xl"
+            className="group block p-6 rounded-2xl border border-[#8d99ae]/55 bg-white hover:border-[#d90429] transition shadow-[0_12px_30px_rgba(43,45,66,0.12)]"
           >
             <div className="flex flex-col md:flex-row gap-6 items-start">
               {art.featured_image_url && (
@@ -80,14 +80,14 @@ export default async function ArticlesIndexPage() {
                   </div>
                 </div>
 
-                <h2 className="text-xl md:text-2xl font-serif font-bold text-mushroomWhite group-hover:text-amberGold-300 transition-colors mb-2">
+                <h2 className="text-xl md:text-2xl font-serif font-bold text-[#2b2d42] group-hover:text-[#d90429] transition-colors mb-2">
                   {art.title}
                 </h2>
                 <p className="text-neutral-400 text-sm line-clamp-2 leading-relaxed mb-4">
                   {art.excerpt}
                 </p>
 
-                <div className="flex items-center gap-1.5 text-xs font-serif font-bold text-amberGold-400">
+                <div className="flex items-center gap-1.5 text-xs font-serif font-bold text-[#d90429]">
                   <span>อ่านบทความฉบับเต็ม</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </div>

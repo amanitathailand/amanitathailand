@@ -53,7 +53,7 @@ export default async function MuseumIndexPage() {
           <Link
             key={hall.id}
             href={`/museum/${hall.slug}`}
-            className="group relative rounded-2xl overflow-hidden border border-crimson-900/60 bg-obsidian-950/70 hover:border-amberGold-500/80 transition-all duration-300 shadow-xl flex flex-col justify-between"
+            className="group relative rounded-2xl overflow-hidden border border-[#8d99ae]/55 bg-white hover:border-[#d90429] transition-all duration-300 shadow-[0_12px_30px_rgba(43,45,66,0.12)] flex flex-col justify-between"
           >
             <div className="relative h-64 overflow-hidden">
               <img
@@ -68,14 +68,14 @@ export default async function MuseumIndexPage() {
               <span className="text-xs font-mono text-amberGold-400 uppercase tracking-widest block mb-1">
                 {hall.subtitle || 'Permanent Hall'}
               </span>
-              <h2 className="text-2xl font-serif font-bold text-mushroomWhite group-hover:text-amberGold-300 transition-colors">
+              <h2 className="text-2xl font-serif font-bold text-[#2b2d42] group-hover:text-[#d90429] transition-colors">
                 {hall.title}
               </h2>
               <p className="text-neutral-400 text-sm mt-3 line-clamp-3 leading-relaxed">
                 {hall.description}
               </p>
 
-              <div className="mt-6 flex items-center gap-2 text-xs font-serif text-amberGold-400 font-bold group-hover:translate-x-1 transition-transform">
+              <div className="mt-6 flex items-center gap-2 text-xs font-serif text-[#d90429] font-bold group-hover:translate-x-1 transition-transform">
                 <Sparkles className="w-4 h-4 text-crimson-400" />
                 <span>เข้าสู่นิทรรศการห้องนี้</span>
                 <ArrowRight className="w-4 h-4" />

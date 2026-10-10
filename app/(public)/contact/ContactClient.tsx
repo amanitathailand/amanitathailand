@@ -279,7 +279,7 @@ export default function ContactClient({ initialSettings }: { initialSettings: Co
               <button
                 type="button"
                 onClick={copyPromptpay}
-                className="px-2.5 py-1 rounded-lg border border-amberGold-800/60 bg-amberGold-500/10 hover:bg-amberGold-500/20 text-amberGold-300 text-xs font-mono flex items-center gap-1"
+                className="btn-outline px-2.5 py-1 rounded-lg text-xs font-mono flex items-center gap-1"
               >
                 {copiedPromptpay ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
                 <span>{copiedPromptpay ? 'คัดลอกแล้ว' : 'คัดลอกเบอร์'}</span>
@@ -325,7 +325,7 @@ export default function ContactClient({ initialSettings }: { initialSettings: Co
                   setSubmitted(false);
                   setForm({ name: '', email: '', phoneOrLine: '', message: '' });
                 }}
-                className="mt-4 px-4 py-2 rounded-xl bg-neutral-800 text-neutral-300 hover:text-white text-xs font-semibold"
+                className="btn-secondary mt-4 px-4 py-2 rounded-xl text-xs font-semibold"
               >
                 ส่งข้อความเพิ่มเติม
               </button>

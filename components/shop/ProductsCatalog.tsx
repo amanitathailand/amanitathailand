@@ -37,10 +37,10 @@ export function ProductsCatalog({ products, siteContent }: ProductsCatalogProps)
           return (
             <div 
               key={prod.id}
-              className="rounded-3xl border border-crimson-950/80 bg-obsidian-950/70 overflow-hidden shadow-2xl flex flex-col justify-between hover:border-amberGold-500/60 transition-all duration-300"
+              className="rounded-3xl border border-[#8d99ae]/55 bg-white overflow-hidden shadow-[0_12px_30px_rgba(43,45,66,0.12)] flex flex-col justify-between hover:border-[#d90429] transition-all duration-300"
             >
               {/* Product Hero Image */}
-              <div className="relative h-72 overflow-hidden bg-neutral-900">
+              <div className="relative h-72 overflow-hidden bg-[#dfe5e9]">
                 <img 
                   src={prod.hero_image_url || 'https://images.unsplash.com/photo-1543857778-c4a1a3e0b2eb?q=80&w=1200&auto=format&fit=crop'} 
                   alt={prod.name}
@@ -48,12 +48,12 @@ export function ProductsCatalog({ products, siteContent }: ProductsCatalogProps)
                 />
                 
                 {/* Botanical Badge */}
-                <div className="absolute top-4 left-4 bg-obsidian-950/90 border border-amberGold-500/40 px-3 py-1 rounded-full text-[11px] font-mono text-amberGold-300 backdrop-blur-md shadow-lg">
+                <div className="absolute top-4 left-4 bg-white/95 border border-[#8d99ae] px-3 py-1 rounded-full text-[11px] font-mono text-[#2b2d42] backdrop-blur-md shadow-lg">
                   {prod.botanical_name}
                 </div>
 
                 {/* Price Tag Badge */}
-                <div className="absolute bottom-4 right-4 bg-crimson-950/90 border border-amberGold-500/60 px-3.5 py-1.5 rounded-xl text-xs font-mono font-bold text-amberGold-300 shadow-xl backdrop-blur-md">
+                <div className="absolute bottom-4 right-4 bg-[#2b2d42]/95 border border-white/70 px-3.5 py-1.5 rounded-xl text-xs font-mono font-bold text-white shadow-xl backdrop-blur-md">
                   เริ่มต้น ฿{startingPrice.toLocaleString()}.-
                 </div>
               </div>
@@ -96,7 +96,7 @@ export function ProductsCatalog({ products, siteContent }: ProductsCatalogProps)
                   {/* Primary Direct Order Button (PromptPay QR + Slip) */}
                   <button
                     onClick={() => setSelectedProductForOrder(prod)}
-                    className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-gradient-to-r from-amberGold-600 to-amberGold-500 hover:from-amberGold-500 hover:to-amberGold-400 text-obsidian-950 text-xs font-serif font-bold transition shadow-xl"
+                    className="btn-primary w-full flex items-center justify-center gap-2 py-3 rounded-xl text-xs font-serif font-bold transition"
                   >
                     <QrCode className="w-4 h-4" />
                     <span>สั่งซื้อทันที (สแกน PromptPay QR & แนบสลิป)</span>
@@ -109,7 +109,7 @@ export function ProductsCatalog({ products, siteContent }: ProductsCatalogProps)
                         href={prod.shopee_url}
                         target="_blank"
                         rel="noreferrer"
-                        className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-[#EE4D2D] hover:bg-[#d63d1e] text-white font-mono font-bold transition shadow-md"
+                        className="btn-shopee flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl font-mono font-bold transition shadow-md"
                       >
                         <ShoppingBag className="w-3.5 h-3.5" />
                         <span>สั่งผ่าน Shopee</span>
@@ -123,7 +123,7 @@ export function ProductsCatalog({ products, siteContent }: ProductsCatalogProps)
                       href={prod.line_oa_url}
                       target="_blank"
                       rel="noreferrer"
-                      className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl border border-[#06C755]/50 bg-[#06C755]/15 text-emerald-300 hover:bg-[#06C755]/30 font-mono font-semibold transition"
+                      className="btn-line flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl font-mono font-semibold transition"
                     >
                       <MessageCircle className="w-3.5 h-3.5" />
                       <span>สอบถาม LINE</span>
