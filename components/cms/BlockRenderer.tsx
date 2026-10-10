@@ -4,6 +4,7 @@ import React from 'react';
 import { ContentBlock } from '@/types';
 import { Quote, AlertCircle, ExternalLink, Layers } from 'lucide-react';
 import { ImageLightbox } from '@/components/media/ImageLightbox';
+import { extractYoutubeVideoId } from '@/lib/media/youtube';
 
 interface BlockRendererProps {
   blocks: ContentBlock[];
@@ -152,13 +153,24 @@ export function BlockRenderer({ blocks }: BlockRendererProps) {
           }
 
           case 'youtube': {
-            const data = block.data as { videoId: string };
+            const data = block.data as { videoId?: string; url?: string };
+            const videoId = extractYoutubeVideoId(data.videoId || data.url);
+            if (!videoId) {
+              return (
+                <div key={block.id} className="my-6 rounded-xl border border-[#d90429]/40 bg-white p-4 text-sm text-[#2b2d42]">
+                  ลิงก์ YouTube ไม่ถูกต้อง กรุณาใช้ลิงก์รูปแบบ `youtube.com/watch?v=...` หรือ `youtu.be/...`
+                </div>
+              );
+            }
             return (
               <div key={block.id} className="my-6 aspect-video rounded-xl overflow-hidden border border-neutral-800 shadow-2xl">
                 <iframe
-                  src={`https://www.youtube.com/embed/${data.videoId}`}
+                  src={`https://www.youtube-nocookie.com/embed/${videoId}`}
                   title="Amanita Video"
                   className="w-full h-full"
+                  loading="lazy"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
                 />
               </div>
