@@ -26,7 +26,13 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
       supabase.from('admin_settings').select('key, value').in('key', ['site_content', 'contact_settings']),
     ]);
     if (productRes.error) throw productRes.error;
-    product = productRes.data as Product | undefined;
+    const rawProduct = productRes.data as Product | undefined;
+    product = rawProduct
+      ? {
+          ...rawProduct,
+          variants: rawProduct.variants?.map(({ note: _note, ...variant }) => variant),
+        }
+      : undefined;
     if (settingsRes.error) throw settingsRes.error;
     const settingsRows = settingsRes.data || [];
     const siteRow = settingsRows.find((row: any) => row.key === 'site_content');
