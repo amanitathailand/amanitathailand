@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Product, ProductVariant } from '@/types';
+import { Product, ProductVariant, ContentBlock } from '@/types';
+import { BlockEditor } from '@/components/cms/BlockEditor';
 import { 
   Plus, 
   Edit2, 
@@ -42,7 +43,8 @@ export default function AdminProductsPage() {
       { size: '5g', price: 590, in_stock: true, note: 'ขนาดยอดนิยม' },
       { size: '10g', price: 990, in_stock: true, note: 'ชุดสะสมเปรียบเทียบ' },
       { size: '15g', price: 1450, in_stock: true, note: 'เกรดสูงสุด' }
-    ] as ProductVariant[]
+    ] as ProductVariant[],
+    content_blocks: [] as ContentBlock[]
   });
 
 
@@ -91,7 +93,8 @@ export default function AdminProductsPage() {
         { size: '5g', price: 590, in_stock: true, note: 'ขนาดยอดนิยม' },
         { size: '10g', price: 990, in_stock: true, note: 'ชุดสะสมเปรียบเทียบ' },
         { size: '15g', price: 1450, in_stock: true, note: 'เกรดสูงสุด' }
-      ]
+      ],
+      content_blocks: []
     });
     setIsModalOpen(true);
   };
@@ -112,7 +115,8 @@ export default function AdminProductsPage() {
       status: prod.status as 'published' | 'draft',
       variants: prod.variants && prod.variants.length > 0 ? prod.variants : [
         { size: '5g', price: prod.price || 590, in_stock: true, note: 'ตัวอย่างมาตรฐาน' }
-      ]
+      ],
+      content_blocks: Array.isArray(prod.content_blocks) ? prod.content_blocks : []
     });
     setIsModalOpen(true);
   };
@@ -365,6 +369,13 @@ export default function AdminProductsPage() {
                   value={form.description}
                   onChange={(e) => setForm({ ...form, description: e.target.value })}
                   className="w-full p-2.5 rounded-xl bg-obsidian-950 border border-neutral-800 text-mushroomWhite focus:border-amberGold-500 resize-none"
+                />
+              </div>
+
+              <div className="p-4 rounded-xl border border-[#8d99ae]/45 bg-obsidian-950/70">
+                <BlockEditor
+                  blocks={form.content_blocks}
+                  onChange={(content_blocks) => setForm({ ...form, content_blocks })}
                 />
               </div>
 

@@ -5,6 +5,7 @@ import { Product, SiteContentSettings } from '@/types';
 import { OrderModal } from '@/components/shop/OrderModal';
 import { ImageLightbox } from '@/components/media/ImageLightbox';
 import { trackMarketingEvent } from '@/lib/analytics/marketing';
+import { BlockRenderer } from '@/components/cms/BlockRenderer';
 import Link from 'next/link';
 import { ArrowLeft, MessageCircle, ShoppingBag, ShieldAlert, QrCode, ExternalLink } from 'lucide-react';
 
@@ -146,6 +147,16 @@ export function ProductDetailView({ product, siteContent }: ProductDetailViewPro
           </div>
         </div>
       </div>
+
+      {product.content_blocks && product.content_blocks.length > 0 && (
+        <section className="mt-12 rounded-3xl border border-[#8d99ae]/45 bg-[#2b2d42] p-6 sm:p-8 shadow-[0_12px_30px_rgba(43,45,66,0.16)]">
+          <div className="mb-2 flex items-center gap-3">
+            <span className="h-8 w-1 rounded-full bg-[#d90429]" />
+            <h2 className="text-2xl font-serif font-bold text-white">รายละเอียดเพิ่มเติม</h2>
+          </div>
+          <BlockRenderer blocks={product.content_blocks} />
+        </section>
+      )}
 
       {isOrderOpen && (
         <OrderModal

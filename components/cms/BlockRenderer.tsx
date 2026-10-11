@@ -74,11 +74,11 @@ export function BlockRenderer({ blocks }: BlockRendererProps) {
           }
 
           case 'quote': {
-            const data = block.data as { quote: string; author?: string };
+            const data = block.data as { quote?: string; text?: string; author?: string };
             return (
               <blockquote key={block.id} className="border-l-4 border-crimson-600 pl-6 py-4 italic text-amberGold-200/90 my-6 bg-crimson-950/30 rounded-r-xl">
                 <Quote className="w-6 h-6 text-crimson-500 mb-2 opacity-70" />
-                <p className="text-lg font-serif leading-relaxed">“{data.quote}”</p>
+                <p className="text-lg font-serif leading-relaxed">“{data.quote || data.text || ''}”</p>
                 {data.author && <cite className="block text-xs text-neutral-400 mt-2 font-mono not-italic">— {data.author}</cite>}
               </blockquote>
             );
@@ -118,14 +118,14 @@ export function BlockRenderer({ blocks }: BlockRendererProps) {
           }
 
           case 'callout': {
-            const data = block.data as { title?: string; message: string; variant?: 'info' | 'warning' };
-            const isWarn = data.variant === 'warning';
+            const data = block.data as { title?: string; message?: string; text?: string; variant?: 'info' | 'warning'; type?: 'info' | 'warning' | 'danger' };
+            const isWarn = data.variant === 'warning' || data.type === 'warning';
             return (
               <div key={block.id} className={`p-5 rounded-xl border ${isWarn ? 'border-amberGold-600/60 bg-amberGold-950/20' : 'border-crimson-800/60 bg-crimson-950/30'} my-6 flex items-start gap-4`}>
                 <AlertCircle className={`w-6 h-6 ${isWarn ? 'text-amberGold-400' : 'text-crimson-400'} shrink-0 mt-0.5`} />
                 <div>
                   {data.title && <h4 className="font-serif font-bold text-mushroomWhite mb-1">{data.title}</h4>}
-                  <p className="text-sm text-neutral-300 leading-relaxed">{data.message}</p>
+                  <p className="text-sm text-neutral-300 leading-relaxed">{data.message || data.text || ''}</p>
                 </div>
               </div>
             );

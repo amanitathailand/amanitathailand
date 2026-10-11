@@ -25,6 +25,19 @@ function normalizeVariants(value: unknown) {
     .filter((variant) => variant.size && Number.isFinite(variant.price) && variant.price > 0);
 }
 
+const ALLOWED_BLOCK_TYPES = new Set(['heading', 'text', 'image', 'gallery', 'video', 'youtube', 'quote', 'timeline', 'accordion', 'audio', '3d_model', 'divider', 'button', 'callout']);
+
+function normalizeContentBlocks(value: unknown) {
+  if (!Array.isArray(value)) return [];
+  return value.slice(0, 80)
+    .filter((block): block is Record<string, unknown> => Boolean(block && typeof block === 'object' && ALLOWED_BLOCK_TYPES.has(String((block as any).type))))
+    .map((block, index) => ({
+      id: String(block.id || `product_block_${index + 1}`).slice(0, 80),
+      type: String(block.type),
+      data: block.data && typeof block.data === 'object' ? block.data : {},
+    }));
+}
+
 export async function GET() {
   try {
     const { supabase, user } = await getAuthenticatedUser();
@@ -74,6 +87,7 @@ export async function POST(req: Request) {
       facebook_url: String(body.facebook_url || '').slice(0, 500),
       shopee_url: body.shopee_url ? String(body.shopee_url).slice(0, 500) : null,
       variants: normalizeVariants(body.variants),
+      content_blocks: normalizeContentBlocks(body.content_blocks),
       status: body.status === 'draft' ? 'draft' : 'published',
       // The live products schema has no updated_at column; omit it until an
       // approved schema migration adds the column.

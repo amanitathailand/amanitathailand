@@ -13,7 +13,8 @@ import {
   Quote, 
   AlertCircle, 
   Minus, 
-  Video 
+  Video,
+  ExternalLink
 } from 'lucide-react';
 
 interface BlockEditorProps {
@@ -51,6 +52,9 @@ export function BlockEditor({ blocks = [], onChange }: BlockEditorProps) {
         break;
       case 'youtube':
         initialData = { url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' };
+        break;
+      case 'button':
+        initialData = { label: 'ดูข้อมูลเพิ่มเติม', url: 'https://', style: 'primary' };
         break;
       case 'divider':
         initialData = {};
@@ -267,6 +271,25 @@ export function BlockEditor({ blocks = [], onChange }: BlockEditorProps) {
                 />
               )}
 
+              {block.type === 'button' && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <input
+                    type="text"
+                    value={block.data?.label || ''}
+                    onChange={(e) => updateBlockData(idx, 'label', e.target.value)}
+                    placeholder="ข้อความบนปุ่ม..."
+                    className="w-full p-2 rounded-lg bg-obsidian-950 border border-neutral-700 text-xs text-mushroomWhite"
+                  />
+                  <input
+                    type="url"
+                    value={block.data?.url || ''}
+                    onChange={(e) => updateBlockData(idx, 'url', e.target.value)}
+                    placeholder="https:// หรือ /หน้าภายใน"
+                    className="w-full p-2 rounded-lg bg-obsidian-950 border border-neutral-700 text-xs text-mushroomWhite font-mono"
+                  />
+                </div>
+              )}
+
               {block.type === 'divider' && (
                 <div className="py-2 text-center text-xs text-neutral-500 font-mono">
                   --- เส้นคั่นส่วนเนื้อหา (Divider) ---
@@ -330,6 +353,14 @@ export function BlockEditor({ blocks = [], onChange }: BlockEditorProps) {
           >
             <Video className="w-3.5 h-3.5 text-red-500" />
             <span>YouTube</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => addBlock('button')}
+            className="px-2.5 py-1.5 rounded-lg border border-neutral-800 bg-obsidian-900 hover:border-amberGold-500/50 text-xs text-neutral-300 flex items-center gap-1.5"
+          >
+            <ExternalLink className="w-3.5 h-3.5 text-[#ef233c]" />
+            <span>ปุ่ม</span>
           </button>
           <button
             type="button"
