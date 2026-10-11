@@ -21,12 +21,12 @@ export function BlockRenderer({ blocks }: BlockRendererProps) {
             const data = block.data as { level?: number; text: string };
             const lvl = data.level || 2;
             if (lvl === 1) {
-              return <h1 key={block.id} className="text-3xl md:text-4xl font-serif text-amberGold-300 font-bold border-b border-crimson-900/50 pb-3">{data.text}</h1>;
+              return <h1 key={block.id} className="text-3xl md:text-4xl font-serif text-[#2b2d42] font-bold border-b border-[#d90429]/35 pb-3">{data.text}</h1>;
             }
             if (lvl === 3) {
-              return <h3 key={block.id} className="text-xl font-serif text-amberGold-200 font-semibold">{data.text}</h3>;
+              return <h3 key={block.id} className="text-xl font-serif text-[#2b2d42] font-semibold">{data.text}</h3>;
             }
-            return <h2 key={block.id} className="text-2xl md:text-3xl font-serif text-amberGold-200/90 font-bold">{data.text}</h2>;
+            return <h2 key={block.id} className="text-2xl md:text-3xl font-serif text-[#2b2d42] font-bold">{data.text}</h2>;
           }
 
           case 'text': {
@@ -34,22 +34,22 @@ export function BlockRenderer({ blocks }: BlockRendererProps) {
             return (
               <div 
                 key={block.id} 
-                className="text-neutral-300 leading-relaxed text-base font-normal whitespace-pre-line"
+                className="text-[#2b2d42] leading-relaxed text-base font-normal whitespace-pre-line"
                 dangerouslySetInnerHTML={{ __html: data.content }}
               />
             );
           }
 
           case 'image': {
-            const data = block.data as { url: string; caption?: string; alt?: string };
+            const data = block.data as { url: string; caption?: string; alt?: string; style?: 'standard' | 'wide' | 'portrait' | 'contain' | 'card' | 'minimal'; align?: 'left' | 'center' | 'right'; width?: 'small' | 'medium' | 'large' };
             return (
-              <figure key={block.id} className="my-6 rounded-xl overflow-hidden border border-crimson-950/80 bg-obsidian-950/60 shadow-xl">
+                <figure key={block.id} className={`my-6 overflow-hidden border border-[#8d99ae]/55 bg-[#edf2f4] shadow-lg ${data.style === 'card' ? 'rounded-2xl p-3' : data.style === 'minimal' ? 'rounded-none border-x-0 border-t-0' : 'rounded-xl'} ${data.align === 'center' ? 'mx-auto' : data.align === 'right' ? 'ml-auto' : 'mr-auto'} ${data.width === 'small' ? 'max-w-md' : data.width === 'medium' ? 'max-w-2xl' : 'w-full'}`}>
                 <ImageLightbox
                   images={[{ src: data.url, alt: data.alt || 'นิทรรศการภาพ Amanita', caption: data.caption }]}
-                  imageClassName="w-full h-auto max-h-[500px] object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                  imageClassName={`${data.style === 'contain' ? 'object-contain' : 'object-cover'} w-full ${data.style === 'portrait' ? 'aspect-[4/5]' : data.style === 'wide' ? 'aspect-[16/7]' : 'max-h-[500px]'} transition-transform duration-500 group-hover:scale-[1.02]`}
                   triggerClassName="group relative block w-full cursor-zoom-in overflow-hidden"
                 />
-                {data.caption && <figcaption className="p-3 text-xs text-center text-neutral-400 font-mono italic">{data.caption}</figcaption>}
+                {data.caption && <figcaption className="p-3 text-xs text-center text-[#596078] font-mono italic">{data.caption}</figcaption>}
               </figure>
             );
           }
@@ -76,10 +76,10 @@ export function BlockRenderer({ blocks }: BlockRendererProps) {
           case 'quote': {
             const data = block.data as { quote?: string; text?: string; author?: string };
             return (
-              <blockquote key={block.id} className="border-l-4 border-crimson-600 pl-6 py-4 italic text-amberGold-200/90 my-6 bg-crimson-950/30 rounded-r-xl">
-                <Quote className="w-6 h-6 text-crimson-500 mb-2 opacity-70" />
+              <blockquote key={block.id} className="border-l-4 border-[#d90429] pl-6 py-4 italic text-[#2b2d42] my-6 bg-[#edf2f4] rounded-r-xl">
+                <Quote className="w-6 h-6 text-[#d90429] mb-2 opacity-80" />
                 <p className="text-lg font-serif leading-relaxed">“{data.quote || data.text || ''}”</p>
-                {data.author && <cite className="block text-xs text-neutral-400 mt-2 font-mono not-italic">— {data.author}</cite>}
+                {data.author && <cite className="block text-xs text-[#596078] mt-2 font-mono not-italic">— {data.author}</cite>}
               </blockquote>
             );
           }
@@ -92,8 +92,8 @@ export function BlockRenderer({ blocks }: BlockRendererProps) {
                   <div key={i} className="relative">
                     <div className="absolute -left-[31px] top-1 w-3.5 h-3.5 rounded-full bg-crimson-600 border-2 border-amberGold-400" />
                     <span className="text-xs font-mono font-bold text-amberGold-400 uppercase tracking-widest">{ev.year}</span>
-                    <h4 className="text-base font-serif font-bold text-mushroomWhite mt-0.5">{ev.title}</h4>
-                    <p className="text-sm text-neutral-400 mt-1">{ev.desc}</p>
+                    <h4 className="text-base font-serif font-bold text-[#2b2d42] mt-0.5">{ev.title}</h4>
+                    <p className="text-sm text-[#596078] mt-1">{ev.desc}</p>
                   </div>
                 ))}
               </div>
@@ -105,12 +105,12 @@ export function BlockRenderer({ blocks }: BlockRendererProps) {
             return (
               <div key={block.id} className="space-y-3 my-6">
                 {(data.items || []).map((item, i) => (
-                  <details key={i} className="p-4 rounded-xl border border-neutral-800 bg-obsidian-900/60 group">
-                    <summary className="font-serif font-semibold text-amberGold-300 cursor-pointer list-none flex justify-between items-center">
+                  <details key={i} className="p-4 rounded-xl border border-[#8d99ae]/50 bg-[#edf2f4] group">
+                    <summary className="font-serif font-semibold text-[#2b2d42] cursor-pointer list-none flex justify-between items-center">
                       <span>{item.title}</span>
-                      <span className="text-amberGold-500 group-open:rotate-180 transition-transform">▼</span>
+                      <span className="text-[#d90429] group-open:rotate-180 transition-transform">▼</span>
                     </summary>
-                    <p className="mt-3 text-sm text-neutral-300 leading-relaxed pt-2 border-t border-neutral-800/60">{item.content}</p>
+                    <p className="mt-3 text-sm text-[#2b2d42] leading-relaxed pt-2 border-t border-[#8d99ae]/40">{item.content}</p>
                   </details>
                 ))}
               </div>
@@ -124,7 +124,7 @@ export function BlockRenderer({ blocks }: BlockRendererProps) {
               <div key={block.id} className={`p-5 rounded-xl border ${isWarn ? 'border-amberGold-600/60 bg-amberGold-950/20' : 'border-crimson-800/60 bg-crimson-950/30'} my-6 flex items-start gap-4`}>
                 <AlertCircle className={`w-6 h-6 ${isWarn ? 'text-amberGold-400' : 'text-crimson-400'} shrink-0 mt-0.5`} />
                 <div>
-                  {data.title && <h4 className="font-serif font-bold text-mushroomWhite mb-1">{data.title}</h4>}
+                  {data.title && <h4 className="font-serif font-bold text-[#2b2d42] mb-1">{data.title}</h4>}
                   <p className="text-sm text-neutral-300 leading-relaxed">{data.message || data.text || ''}</p>
                 </div>
               </div>
@@ -132,14 +132,14 @@ export function BlockRenderer({ blocks }: BlockRendererProps) {
           }
 
           case 'button': {
-            const data = block.data as { label: string; url: string; style?: string };
+            const data = block.data as { label: string; url: string; style?: 'primary' | 'dark' | 'outline'; align?: 'left' | 'center' | 'right' };
             return (
-              <div key={block.id} className="my-6">
+              <div key={block.id} className={`my-6 flex ${data.align === 'center' ? 'justify-center' : data.align === 'right' ? 'justify-end' : 'justify-start'}`}>
                 <a 
                   href={data.url} 
                   target="_blank" 
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-crimson-800 hover:bg-crimson-700 text-mushroomWhite font-serif text-sm font-semibold tracking-wide transition shadow-lg hover:shadow-crimson-900/40"
+                  className={`inline-flex items-center gap-2 px-6 py-3 rounded-xl font-serif text-sm font-semibold tracking-wide transition shadow-md ${data.style === 'outline' ? 'border-2 border-[#d90429] text-[#d90429] bg-white hover:bg-[#fff1f2]' : data.style === 'dark' ? 'bg-[#2b2d42] text-white hover:bg-[#596078]' : 'bg-[#d90429] text-white hover:bg-[#b80324]'} ${data.align === 'center' ? 'mx-auto' : data.align === 'right' ? 'ml-auto' : ''}`}
                 >
                   <span>{data.label}</span>
                   <ExternalLink className="w-4 h-4" />
@@ -195,7 +195,7 @@ export function BlockRenderer({ blocks }: BlockRendererProps) {
             return (
               <div key={block.id} className="p-6 rounded-xl border border-crimson-900/60 bg-obsidian-950/70 text-center my-6">
                 <Layers className="w-8 h-8 text-amberGold-400 mx-auto mb-2" />
-                <p className="text-sm font-serif text-mushroomWhite">{data.label || 'วัตถุจัดแสดง 3 มิติ (3D Exhibit Artifact)'}</p>
+                <p className="text-sm font-serif text-[#2b2d42]">{data.label || 'วัตถุจัดแสดง 3 มิติ (3D Exhibit Artifact)'}</p>
                 <span className="text-xs text-neutral-400 font-mono mt-1 block">GLB Source: {data.modelUrl}</span>
               </div>
             );

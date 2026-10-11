@@ -195,6 +195,24 @@ export function BlockEditor({ blocks = [], onChange }: BlockEditorProps) {
 
               {block.type === 'image' && (
                 <div className="space-y-2">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                    <select value={block.data?.style || 'standard'} onChange={(e) => updateBlockData(idx, 'style', e.target.value)} className="p-2 rounded-lg bg-obsidian-950 border border-neutral-700 text-xs text-mushroomWhite">
+                      <option value="standard">รูปมาตรฐาน</option>
+                      <option value="wide">รูปแนวนอนกว้าง</option>
+                      <option value="portrait">รูปแนวตั้ง</option>
+                      <option value="contain">แสดงภาพเต็ม</option>
+                    </select>
+                    <select value={block.data?.align || 'left'} onChange={(e) => updateBlockData(idx, 'align', e.target.value)} className="p-2 rounded-lg bg-obsidian-950 border border-neutral-700 text-xs text-mushroomWhite">
+                      <option value="left">ชิดซ้าย</option>
+                      <option value="center">กึ่งกลาง</option>
+                      <option value="right">ชิดขวา</option>
+                    </select>
+                    <select value={block.data?.width || 'large'} onChange={(e) => updateBlockData(idx, 'width', e.target.value)} className="p-2 rounded-lg bg-obsidian-950 border border-neutral-700 text-xs text-mushroomWhite">
+                      <option value="small">กว้างเล็ก</option>
+                      <option value="medium">กว้างกลาง</option>
+                      <option value="large">เต็มพื้นที่</option>
+                    </select>
+                  </div>
                   <input
                     type="text"
                     value={block.data?.url || ''}
@@ -287,6 +305,16 @@ export function BlockEditor({ blocks = [], onChange }: BlockEditorProps) {
                     placeholder="https:// หรือ /หน้าภายใน"
                     className="w-full p-2 rounded-lg bg-obsidian-950 border border-neutral-700 text-xs text-mushroomWhite font-mono"
                   />
+                  <select value={block.data?.style || 'primary'} onChange={(e) => updateBlockData(idx, 'style', e.target.value)} className="p-2 rounded-lg bg-obsidian-950 border border-neutral-700 text-xs text-mushroomWhite">
+                    <option value="primary">แดงหลัก</option>
+                    <option value="dark">Navy สุภาพ</option>
+                    <option value="outline">กรอบโปร่ง</option>
+                  </select>
+                  <select value={block.data?.align || 'left'} onChange={(e) => updateBlockData(idx, 'align', e.target.value)} className="p-2 rounded-lg bg-obsidian-950 border border-neutral-700 text-xs text-mushroomWhite">
+                    <option value="left">ชิดซ้าย</option>
+                    <option value="center">กึ่งกลาง</option>
+                    <option value="right">ชิดขวา</option>
+                  </select>
                 </div>
               )}
 
