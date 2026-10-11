@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Product, SiteContentSettings } from '@/types';
 import { OrderModal } from '@/components/shop/OrderModal';
 import { ImageLightbox } from '@/components/media/ImageLightbox';
+import { trackMarketingEvent } from '@/lib/analytics/marketing';
 import Link from 'next/link';
 import { ArrowLeft, MessageCircle, ShoppingBag, ShieldAlert, QrCode, ExternalLink } from 'lucide-react';
 
@@ -18,6 +19,28 @@ export function ProductDetailView({ product, siteContent }: ProductDetailViewPro
   const promptpayNumber = siteContent.promptpay_number || '0909964514';
   const promptpayName = siteContent.promptpay_name || 'นายวันชนะ';
   const promptpayBank = siteContent.promptpay_bank || 'ธนาคารกสิกรไทย (K-Bank)';
+
+  useEffect(() => {
+    trackMarketingEvent('ViewContent', {
+      content_ids: [product.id],
+      content_name: product.name,
+      content_type: 'product',
+      currency: 'THB',
+      value: product.price || product.variants?.[0]?.price || 0,
+    }, product.id);
+  }, [product.id, product.name, product.price, product.variants]);
+
+  const openOrder = () => {
+    trackMarketingEvent('InitiateCheckout', {
+      content_ids: [product.id],
+      content_name: product.name,
+      content_type: 'product',
+      currency: 'THB',
+      value: product.price || product.variants?.[0]?.price || 0,
+      num_items: 1,
+    }, product.id);
+    setIsOrderOpen(true);
+  };
 
   return (
     <div>
@@ -88,7 +111,7 @@ export function ProductDetailView({ product, siteContent }: ProductDetailViewPro
 
             {/* Direct Order Button */}
             <button
-              onClick={() => setIsOrderOpen(true)}
+              onClick={openOrder}
               className="btn-primary w-full py-3.5 rounded-xl font-serif font-bold text-sm tracking-wide transition-all flex items-center justify-center gap-2"
             >
               <QrCode className="w-4 h-4" />

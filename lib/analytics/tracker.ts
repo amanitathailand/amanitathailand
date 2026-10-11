@@ -7,6 +7,11 @@ export type EventType =
   | 'exhibit_open'
   | 'article_view'
   | 'product_view'
+  | 'view_content'
+  | 'add_to_cart'
+  | 'initiate_checkout'
+  | 'purchase'
+  | 'lead'
   | 'line_click'
   | 'facebook_click'
   | 'contact_submit';

@@ -5,6 +5,7 @@ import { Product, ProductVariant, Order } from '@/types';
 import { createClient } from '@/lib/supabase/client';
 import { getPromptPayQrImageUrl } from '@/lib/utils/promptpay';
 import { safeLocalStorageGet } from '@/lib/utils/storage';
+import { trackMarketingEvent } from '@/lib/analytics/marketing';
 import { 
   X, 
   ShoppingBag, 
@@ -177,6 +178,16 @@ export function OrderModal({
       if (orderError) {
         throw new Error(`บันทึกคำสั่งซื้อไม่สำเร็จ: ${orderError.message}`);
       }
+
+      trackMarketingEvent('Purchase', {
+        content_ids: [product.id],
+        content_name: product.name,
+        content_type: 'product',
+        currency: 'THB',
+        value: totalPrice,
+        quantity,
+        variant: selectedVariant.size,
+      }, orderNumber);
 
       // 3. Send automated alert to LINE via API
       try {
