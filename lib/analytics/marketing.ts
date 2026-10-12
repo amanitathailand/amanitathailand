@@ -32,7 +32,18 @@ export function trackMarketingEvent(
 ) {
   if (typeof window !== 'undefined') {
     const marketingWindow = window as MarketingWindow;
-    marketingWindow.fbq?.('track', eventName, params);
+    const sendMetaEvent = () => {
+      if (typeof marketingWindow.fbq !== 'function') return false;
+      marketingWindow.fbq('track', eventName, params);
+      return true;
+    };
+    if (!sendMetaEvent()) {
+      let attempts = 0;
+      const retry = window.setInterval(() => {
+        attempts += 1;
+        if (sendMetaEvent() || attempts >= 10) window.clearInterval(retry);
+      }, 250);
+    }
     marketingWindow.ttq?.track?.(eventName, params);
     marketingWindow.gtag?.('event', eventName, params);
   }
