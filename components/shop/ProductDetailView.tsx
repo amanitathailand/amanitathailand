@@ -105,8 +105,12 @@ export function ProductDetailView({ product, siteContent }: ProductDetailViewPro
           </div>
 
           <div className="space-y-4 pt-6 border-t border-neutral-800">
-            <div className="p-4 rounded-xl border border-amberGold-900/40 bg-amberGold-950/10 text-amberGold-300/80 text-[11px] leading-relaxed flex items-start gap-2.5">
-              <ShieldAlert className="w-4 h-4 text-amberGold-400 shrink-0 mt-0.5" />
+            <div className="flex items-center justify-between gap-3">
+              <h2 className="text-sm font-serif font-bold text-[#2b2d42]">ข้อมูลสำคัญก่อนสั่งซื้อ</h2>
+              <span className="text-[10px] font-mono text-[#596078]">โปรดอ่านก่อนตัดสินใจ</span>
+            </div>
+            <div className="p-4 rounded-xl border border-[#8d99ae]/55 bg-[#edf2f4] text-[#2b2d42] text-[12px] leading-relaxed flex items-start gap-2.5">
+              <ShieldAlert className="w-4 h-4 text-[#d90429] shrink-0 mt-0.5" />
               <span>{product.disclaimer}</span>
             </div>
 
@@ -116,7 +120,7 @@ export function ProductDetailView({ product, siteContent }: ProductDetailViewPro
               className="btn-primary w-full py-3.5 rounded-xl font-serif font-bold text-sm tracking-wide transition-all flex items-center justify-center gap-2"
             >
               <QrCode className="w-4 h-4" />
-              <span>สั่งซื้อทันที (สแกน PromptPay QR ยอดจริง & แนบสลิป)</span>
+              <span>สั่งซื้อโดยตรงผ่าน PromptPay</span>
             </button>
 
             {/* Shopee & LINE Buttons */}
@@ -129,7 +133,7 @@ export function ProductDetailView({ product, siteContent }: ProductDetailViewPro
                   className="btn-shopee flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-mono font-bold transition shadow-md"
                 >
                   <ShoppingBag className="w-4 h-4" />
-                  <span>สั่งซื้อผ่าน Shopee</span>
+                  <span>ซื้อผ่าน Shopee</span>
                   <ExternalLink className="w-3.5 h-3.5 opacity-80" />
                 </a>
               )}
@@ -141,7 +145,7 @@ export function ProductDetailView({ product, siteContent }: ProductDetailViewPro
                 className="btn-line flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-mono font-semibold transition"
               >
                 <MessageCircle className="w-4 h-4 text-white" />
-                <span>สอบถาม LINE OA</span>
+                <span>สอบถามก่อนซื้อทาง LINE</span>
               </a>
             </div>
           </div>
@@ -157,6 +161,28 @@ export function ProductDetailView({ product, siteContent }: ProductDetailViewPro
           <BlockRenderer blocks={product.content_blocks} />
         </section>
       )}
+
+      <section className="mt-10 rounded-2xl border border-[#8d99ae]/55 bg-[#2b2d42] p-5 sm:p-6 shadow-[0_10px_24px_rgba(43,45,66,0.14)]">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div>
+            <h2 className="text-lg font-serif font-bold text-white">ต้องการรายละเอียดเพิ่มเติมหรือสั่งซื้อ?</h2>
+            <p className="mt-1 text-sm text-[#edf2f4]">เลือกช่องทางที่สะดวกสำหรับคุณ</p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:min-w-[420px]">
+            <button onClick={openOrder} className="btn-primary px-4 py-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2">
+              <QrCode className="w-4 h-4" /> สั่งซื้อโดยตรง
+            </button>
+            <a href={product.line_oa_url} target="_blank" rel="noreferrer" className="btn-outline px-4 py-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2">
+              <MessageCircle className="w-4 h-4" /> สอบถาม LINE
+            </a>
+            {product.shopee_url && (
+              <a href={product.shopee_url} target="_blank" rel="noreferrer" className="btn-shopee px-4 py-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2">
+                <ShoppingBag className="w-4 h-4" /> Shopee
+              </a>
+            )}
+          </div>
+        </div>
+      </section>
 
       {isOrderOpen && (
         <OrderModal
