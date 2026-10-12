@@ -71,9 +71,10 @@ export function ScriptInjector({ configs: initialConfigs = [] }: { configs?: Pix
         }
 
         if (c.provider === 'meta') {
+          const safePixelId = String(c.pixel_id).replace(/[^0-9]/g, '');
+          if (!safePixelId) return null;
           return (
-            <Script id="meta-pixel" strategy="afterInteractive" key={uniqueKey}>
-              {`
+            <script id={`meta-pixel-${safePixelId}`} key={uniqueKey} dangerouslySetInnerHTML={{ __html: `
                 !function(f,b,e,v,n,t,s)
                 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
                 n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -82,10 +83,9 @@ export function ScriptInjector({ configs: initialConfigs = [] }: { configs?: Pix
                 t.src=v;s=b.getElementsByTagName(e)[0];
                 s.parentNode.insertBefore(t,s)}(window, document,'script',
                 'https://connect.facebook.net/en_US/fbevents.js');
-                fbq('init', '${c.pixel_id}');
+                fbq('init', '${safePixelId}');
                 fbq('track', 'PageView');
-              `}
-            </Script>
+              ` }} />
           );
         }
 
