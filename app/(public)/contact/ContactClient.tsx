@@ -3,6 +3,7 @@
 
 import React, { useState } from 'react';
 import { trackEvent } from '@/lib/analytics/tracker';
+import { trackMarketingEvent } from '@/lib/analytics/marketing';
 import { ContactSettings } from '@/types';
 import { 
   MessageCircle, 
@@ -71,6 +72,10 @@ export default function ContactClient({ initialSettings }: { initialSettings: Co
       }
 
       setSubmitted(true);
+      trackMarketingEvent('Lead', {
+        content_name: 'Contact form',
+        content_type: 'lead',
+      }, 'contact_page');
       showToast('success', result.notificationStatus === 'sent'
         ? 'บันทึกข้อความแล้วและแจ้งผู้ดูแลทาง LINE แล้ว'
         : 'บันทึกข้อความลงระบบแล้ว แต่การแจ้งเตือน LINE ยังไม่พร้อม ผู้ดูแลควรตรวจรายการในฐานข้อมูล');
@@ -141,7 +146,10 @@ export default function ContactClient({ initialSettings }: { initialSettings: Co
                 href={settings.line_oa_url || 'https://line.me'}
                 target="_blank"
                 rel="noreferrer"
-                onClick={() => trackEvent('line_click', 'contact_page')}
+                onClick={() => {
+                  trackEvent('line_click', 'contact_page');
+                  trackMarketingEvent('Contact', { content_name: 'LINE Official Account', content_type: 'contact' }, 'contact_page');
+                }}
                 className="flex items-center justify-between p-3.5 rounded-2xl border border-[#06C755]/30 bg-[#06C755]/5 hover:bg-[#06C755]/15 text-mushroomWhite transition group"
               >
                 <div className="flex items-center gap-3">
@@ -164,7 +172,10 @@ export default function ContactClient({ initialSettings }: { initialSettings: Co
                 href={settings.facebook_url || 'https://facebook.com'}
                 target="_blank"
                 rel="noreferrer"
-                onClick={() => trackEvent('facebook_click', 'contact_page')}
+                onClick={() => {
+                  trackEvent('facebook_click', 'contact_page');
+                  trackMarketingEvent('Contact', { content_name: 'Facebook Fanpage', content_type: 'contact' }, 'contact_page');
+                }}
                 className="flex items-center justify-between p-3.5 rounded-2xl border border-[#1877F2]/30 bg-[#1877F2]/5 hover:bg-[#1877F2]/15 text-mushroomWhite transition group"
               >
                 <div className="flex items-center gap-3">
@@ -186,6 +197,7 @@ export default function ContactClient({ initialSettings }: { initialSettings: Co
               {settings.phone_number && (
                 <a
                   href={`tel:${settings.phone_number.replace(/[^0-9]/g, '')}`}
+                  onClick={() => trackMarketingEvent('Contact', { content_name: 'Phone', content_type: 'contact' }, 'contact_page')}
                   className="flex items-center justify-between p-3.5 rounded-2xl border border-amberGold-900/40 bg-obsidian-900/60 hover:bg-obsidian-900 text-mushroomWhite transition group"
                 >
                   <div className="flex items-center gap-3">
@@ -205,6 +217,7 @@ export default function ContactClient({ initialSettings }: { initialSettings: Co
               {settings.email && (
                 <a
                   href={`mailto:${settings.email}`}
+                  onClick={() => trackMarketingEvent('Contact', { content_name: 'Email', content_type: 'contact' }, 'contact_page')}
                   className="flex items-center justify-between p-3.5 rounded-2xl border border-neutral-800 bg-obsidian-900/40 hover:bg-obsidian-900 text-mushroomWhite transition group"
                 >
                   <div className="flex items-center gap-3">
@@ -226,6 +239,7 @@ export default function ContactClient({ initialSettings }: { initialSettings: Co
                   href={settings.shopee_url}
                   target="_blank"
                   rel="noreferrer"
+                  onClick={() => trackMarketingEvent('InitiateCheckout', { content_name: 'Shopee store', content_type: 'product', checkout_channel: 'shopee' }, 'contact_page')}
                   className="flex items-center justify-between p-3.5 rounded-2xl border border-[#EE4D2D]/30 bg-[#EE4D2D]/5 hover:bg-[#EE4D2D]/15 text-mushroomWhite transition group"
                 >
                   <div className="flex items-center gap-3">

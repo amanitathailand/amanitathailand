@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Product, SiteContentSettings } from '@/types';
 import { OrderModal } from '@/components/shop/OrderModal';
 import { ImageLightbox } from '@/components/media/ImageLightbox';
+import { trackMarketingEvent } from '@/lib/analytics/marketing';
 import Link from 'next/link';
 import { 
   ShoppingBag, 
@@ -27,6 +28,15 @@ export function ProductsCatalog({ products, siteContent }: ProductsCatalogProps)
   const promptpayNumber = siteContent.promptpay_number || '0909964514';
   const promptpayName = siteContent.promptpay_name || 'นายวันชนะ';
   const promptpayBank = siteContent.promptpay_bank || 'ธนาคารกสิกรไทย (K-Bank)';
+
+  const openDirectOrder = (product: Product) => {
+    const value = product.price || product.variants?.[0]?.price || 0;
+    trackMarketingEvent('InitiateCheckout', {
+      content_ids: [product.id], content_name: product.name, content_type: 'product',
+      currency: 'THB', value, num_items: 1, checkout_channel: 'promptpay',
+    }, product.id);
+    setSelectedProductForOrder(product);
+  };
 
   return (
     <div>
@@ -96,7 +106,7 @@ export function ProductsCatalog({ products, siteContent }: ProductsCatalogProps)
                 <div className="pt-4 border-t border-neutral-800/80 space-y-2.5">
                   {/* Primary Direct Order Button (PromptPay QR + Slip) */}
                   <button
-                    onClick={() => setSelectedProductForOrder(prod)}
+                    onClick={() => openDirectOrder(prod)}
                     className="btn-primary w-full flex items-center justify-center gap-2 py-3 rounded-xl text-xs font-serif font-bold transition"
                   >
                     <QrCode className="w-4 h-4" />
@@ -110,6 +120,11 @@ export function ProductsCatalog({ products, siteContent }: ProductsCatalogProps)
                         href={prod.shopee_url}
                         target="_blank"
                         rel="noreferrer"
+                        onClick={() => trackMarketingEvent('InitiateCheckout', {
+                          content_ids: [prod.id], content_name: prod.name, content_type: 'product',
+                          currency: 'THB', value: prod.price || prod.variants?.[0]?.price || 0,
+                          num_items: 1, checkout_channel: 'shopee',
+                        }, prod.id)}
                         className="btn-shopee flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl font-mono font-bold transition shadow-md"
                       >
                         <ShoppingBag className="w-3.5 h-3.5" />
@@ -124,6 +139,7 @@ export function ProductsCatalog({ products, siteContent }: ProductsCatalogProps)
                       href={prod.line_oa_url}
                       target="_blank"
                       rel="noreferrer"
+                      onClick={() => trackMarketingEvent('Contact', { content_name: prod.name, content_type: 'product' }, prod.id)}
                       className="btn-line flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl font-mono font-semibold transition"
                     >
                       <MessageCircle className="w-3.5 h-3.5" />

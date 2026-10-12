@@ -43,6 +43,22 @@ export function ProductDetailView({ product, siteContent }: ProductDetailViewPro
     setIsOrderOpen(true);
   };
 
+  const openLine = () => {
+    trackMarketingEvent('Contact', { content_name: product.name, content_type: 'product' }, product.id);
+  };
+
+  const openShopee = () => {
+    trackMarketingEvent('InitiateCheckout', {
+      content_ids: [product.id],
+      content_name: product.name,
+      content_type: 'product',
+      currency: 'THB',
+      value: product.price || product.variants?.[0]?.price || 0,
+      num_items: 1,
+      checkout_channel: 'shopee',
+    }, product.id);
+  };
+
   return (
     <div>
       <Link 
@@ -130,6 +146,7 @@ export function ProductDetailView({ product, siteContent }: ProductDetailViewPro
                   href={product.shopee_url}
                   target="_blank"
                   rel="noreferrer"
+                  onClick={openShopee}
                   className="btn-shopee flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-mono font-bold transition shadow-md"
                 >
                   <ShoppingBag className="w-4 h-4" />
@@ -142,6 +159,7 @@ export function ProductDetailView({ product, siteContent }: ProductDetailViewPro
                 href={product.line_oa_url}
                 target="_blank"
                 rel="noreferrer"
+                onClick={openLine}
                 className="btn-line flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-mono font-semibold transition"
               >
                 <MessageCircle className="w-4 h-4 text-white" />
@@ -172,11 +190,11 @@ export function ProductDetailView({ product, siteContent }: ProductDetailViewPro
             <button onClick={openOrder} className="btn-primary px-4 py-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2">
               <QrCode className="w-4 h-4" /> สั่งซื้อโดยตรง
             </button>
-            <a href={product.line_oa_url} target="_blank" rel="noreferrer" className="btn-outline px-4 py-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2">
+            <a href={product.line_oa_url} target="_blank" rel="noreferrer" onClick={openLine} className="btn-outline px-4 py-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2">
               <MessageCircle className="w-4 h-4" /> สอบถาม LINE
             </a>
             {product.shopee_url && (
-              <a href={product.shopee_url} target="_blank" rel="noreferrer" className="btn-shopee px-4 py-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2">
+              <a href={product.shopee_url} target="_blank" rel="noreferrer" onClick={openShopee} className="btn-shopee px-4 py-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2">
                 <ShoppingBag className="w-4 h-4" /> Shopee
               </a>
             )}

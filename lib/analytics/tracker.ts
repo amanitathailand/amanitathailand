@@ -8,10 +8,11 @@ export type EventType =
   | 'article_view'
   | 'product_view'
   | 'view_content'
-  | 'add_to_cart'
+  | 'add_payment_info'
   | 'initiate_checkout'
   | 'purchase'
   | 'lead'
+  | 'contact'
   | 'line_click'
   | 'facebook_click'
   | 'contact_submit';

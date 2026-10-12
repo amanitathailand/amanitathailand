@@ -1,6 +1,6 @@
 import { trackEvent, type EventType } from '@/lib/analytics/tracker';
 
-type MarketingEventName = 'ViewContent' | 'AddToCart' | 'InitiateCheckout' | 'Purchase' | 'Lead';
+type MarketingEventName = 'ViewContent' | 'AddPaymentInfo' | 'InitiateCheckout' | 'Purchase' | 'Lead' | 'Contact';
 type MarketingParams = {
   content_ids?: string[];
   content_name?: string;
@@ -19,10 +19,11 @@ type MarketingWindow = Window & {
 
 const eventMap: Partial<Record<MarketingEventName, EventType>> = {
   ViewContent: 'view_content',
-  AddToCart: 'add_to_cart',
+  AddPaymentInfo: 'add_payment_info',
   InitiateCheckout: 'initiate_checkout',
   Purchase: 'purchase',
   Lead: 'lead',
+  Contact: 'contact',
 };
 
 export function trackMarketingEvent(

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Product, ProductVariant, Order } from '@/types';
 import { createClient } from '@/lib/supabase/client';
 import { getPromptPayQrImageUrl } from '@/lib/utils/promptpay';
@@ -67,6 +67,7 @@ export function OrderModal({
   const [activePromptpayNumber, setActivePromptpayNumber] = useState(promptpayNumber);
   const [activePromptpayName, setActivePromptpayName] = useState(promptpayName);
   const [activePromptpayBank, setActivePromptpayBank] = useState(promptpayBank);
+  const paymentInfoTracked = useRef(false);
 
   useEffect(() => {
     const cached = safeLocalStorageGet<any>('amanita_contact_settings');
@@ -108,6 +109,17 @@ export function OrderModal({
     const file = e.target.files?.[0];
     if (file) {
       setSlipFile(file);
+      if (!paymentInfoTracked.current) {
+        paymentInfoTracked.current = true;
+        trackMarketingEvent('AddPaymentInfo', {
+          content_ids: [product.id],
+          content_name: product.name,
+          content_type: 'product',
+          currency: 'THB',
+          value: totalPrice,
+          payment_method: 'promptpay',
+        }, product.id);
+      }
       const url = URL.createObjectURL(file);
       setSlipPreview(url);
     }
